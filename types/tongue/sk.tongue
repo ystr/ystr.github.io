@@ -1,0 +1,133 @@
+Slovak
+
+[Main]
+
+Search = H¾ada
+Add = Prida
+Types = Typy
+Classes = Triedy
+Extensions = Rozšírenia 
+Type = Typ
+Use linked class = Poui prepojenú triedu
+Title = Nadpis
+Name = Meno
+Properties = Vlastnosti
+Rename = Premenuj
+Delete = Vyma
+Create = Vytvor
+Refresh = Obnov
+Class = Trieda
+Actions = Akcie
+Icon = Ikona
+Default = Predvolenı
+Use DDE = Poui DDE
+DDE Message = DDE správa
+Application = Aplikácia
+Application not running = Aplikácia nie je spustená
+Topic = Téma
+Executables = Spustite¾né
+Perceived type = Predpokladanı typ
+Other = Inı
+Extension visibility = Vidite¾nos prípony
+Follow Explorer settings = Pod¾a nastavenia Explorera
+Always show extension = Vdy uká príponu
+Never show extension = Neuká príponu
+About = O programe
+License = Licencia
+Authors = Autori
+Manual = Príruèka
+History = História
+Enter new extension (starting with dot) here = Vlo novú príponu (zaèína bodkou)
+Class properties = Vlastnosti triedy
+Add class = Pridaj triedu
+Delete class = Zma triedu
+Filter = Filter
+Disable filter = Zruš filter
+Add menu item = Pridaj poloku menu
+Delete item = Zma poloku
+Row text = Riadok textu
+Select program = Vyber program
+Command = Príkaz
+Remove icon = Odstráò ikonu
+Select icon file = Vzber súbor s ikonami
+Icon file = Súbor s ikonami
+Hidden = Skrytı
+Special = Špeciálny
+All types = Všetky typy
+Unknown = Neznámy
+Folder = Adresár
+Rules = Pravidlá
+Enable content rules = Povo¾ pravidlá obsahu
+Starts with: = Zaèína na:
+Contains: = Obsahuje:
+Add rule = Pridaj pravidlo
+Delete rule = Zma pravidlo
+Rule name = Názov pravidla
+Matching method = Metóda porovnania
+Text to find = H¾adanı text
+
+[Setup]
+
+Types setup = Nastavenie Types
+Install = Inštalova
+Cancel = Zruš
+Add to Control Panel = Pridaj na Riadiaci panel
+Start menu shortcut = Zástupca v Štart Menu
+Desktop shortcut = Zástupca na plochu
+Abort = Zruš
+Close = Zatvor
+Types = Types
+Where to put program files? = Kam uloi súbory programu?
+Aborted by user = Zrušené uívate¾om
+Done = Hotovo
+Fail = Chyba
+Already exists, backing up = U existuje, zálohujem
+Creating program folder = Vytváram adresár
+Already exists = U existuje
+Cannot create directory = Nemôem vytvori adresár
+Extracting main executable = Rozba¾ujem program
+Extracting association proxy = Rozba¾ujem asociáciu proxy
+Cannot copy = Nemôem kopírova
+Applying settings = Nastavujem
+Failed to modify registry = Nepodarilo sa upravi registre
+Extracting control panel applet = Extrahujem aplet Riadiaceho panelu
+Registering control panel applet = Registrujem aplet Riadiaceho panelu
+Error registering control panel applet = Chyba registrácie apletu Riadiaceho panelu
+Creating desktop shortcut = Vytváram zástupcu na ploche
+Cannot add desktop shortcut = Nemôem prida zástupcu na plochu
+Creating Start menu shortcut = Vytváram zástupcu v Štart Menu
+Cannot add Start menu shortcut = Nemôem prida zástupcu do Štart Menu
+Extracting uninstaller = Rozba¾ujem odinštalátor
+Registering uninstaller = Registrujem odinštalátor
+Failed to add uninstall entry = Nepodarilo sa prida poloku odinštalácie
+Removing backup files = Odstraòujem zálohu
+Installation completed = Inštalácia ukonèená
+Rolling back = Vraciam pôvodnı stav
+Removing main executable = Odstraòujem program
+Removing association proxy = Odstraòujem asociáciu proxy
+Removing uninstaller = Odstraòujem odinštalátor
+Removing control panel applet = Odstraòujem aplet Riadiaceho panelu
+Restoring backup files = Obnovujem yálohované súbory
+Removing directory = Odstraòujem adresár
+Removing desktop shortcut = Odstraòujem zástupcu na ploche
+Removing Start menu shortcut = Odstraòujem zástupcu zo Štart Menu
+Installation aborted = Inštalácia zrušená
+Add to context menus = Pridávam do menu
+Adding context menu entry = Pridávam poloku menu
+Cannot add context menu entry = Nemôem prida poloku menu
+Removing context menu entry = Odstraòujem poloku menu
+Edit file type = Uprav typ súboru
+Copying language packs = Kopírujem jazykové balíèky
+
+[Remove]
+
+Types removal = Odstraòovanie
+RemoveTypes? = Ste si istı, e chcete odstráni poloku?
+CheckNotRunning. = Uistite sa, ¡ye program nebeí.
+EraseSettings? = Vymaza všetky nastavenia programu?
+RemovalDone. = Types bol odstránenı z Vášho systému.
+
+[Panel]
+
+PanelDescription = Správa typov súborov
+PanelKeywords = prípony;asociácie;typy;triedy;ikony;obsah;menu;explorer

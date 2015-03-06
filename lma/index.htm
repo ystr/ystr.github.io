@@ -1,0 +1,21 @@
+<title>Lma</title><meta charset=UTF-8>
+<style> code { tab-size: 2 } </style>
+<p>Lisp-like macroassembler.<p>
+<p><b><a href=Lma.7z>Lma.7z</a></b> (10 KB)</p>
+<p>Factorial:</p>
+<code><pre>
+[= [fac n]
+	[if [== n 0] 1
+		else: [* n [fac [- n 1]]] ]]
+</pre></code>
+<p>...or simply:</p>
+<code><pre>[= [fac n] [apply * [[range n 0]]]]</code></pre>
+<p>Knuth's man or boy test:</p>
+<code><pre>
+[λ [n]
+	[= [A k x1 x2 x3 x4 x5]
+		[= [B] [=- k 1]
+			[A k B x1 x2 x3 x4] ]
+		[if [&lt;= k 0] [+ [x4][x5]] :: [B]] ]
+	[A n 1 -1 -1 1 0] ]
+</pre></code>

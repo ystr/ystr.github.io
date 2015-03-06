@@ -1,0 +1,79 @@
+﻿Replace this line with your language name (example: English).
+Replace xx in the file name with your language code (example: en).
+You can safely delete all unnecessary lines (including this one).
+
+[Main]
+
+Search =
+Add =
+Types = 
+Classes = 
+Extensions = 
+Type = 
+Use linked class = 
+Title = 
+Name = 
+Properties = 
+Rename = 
+Delete = 
+Create = 
+Refresh = 
+Class = 
+Actions = 
+Icon = 
+Default = 
+Use DDE = 
+DDE Message = 
+Application = 
+Application not running = 
+Topic = 
+Executables = 
+Perceived type = 
+Other = 
+Extension visibility = 
+Follow Explorer settings = 
+Always show extension = 
+Never show extension = 
+About = 
+License = 
+Authors = 
+Manual = 
+History = 
+Enter new extension (starting with dot) here = 
+Class properties = 
+Add class = 
+Delete class = 
+Filter = 
+Disable filter = 
+Add menu item = 
+Delete item = 
+Row text = 
+Select program = 
+Command = 
+Remove icon = 
+Select icon file = 
+Icon file = 
+Hidden = 
+Special = 
+All types = 
+Unknown = 
+Folder = 
+Access denied = 
+Run as administrator = 
+
+[Setup]
+
+Types setup = 
+Install = 
+Add to Control Panel = 
+Start menu shortcut = 
+Desktop shortcut = 
+Where to put program files? = 
+Done = 
+Add to context menus = 
+Edit file type = 
+
+[Panel]
+
+PanelDescription = Manage file types
+PanelKeywords = extensions;associations;types;classes;icons;context;menu;explorer

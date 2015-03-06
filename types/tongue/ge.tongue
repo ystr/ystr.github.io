@@ -1,0 +1,83 @@
+﻿Georgian
+ge
+
+[Main]
+
+Search = ძებნა
+Add = დამატება
+Types = ტიპები
+Classes = კლასები
+Extensions = გაფართოებები
+Type = ტიპი
+Use linked class = დაკავირებული კლასის გამოყენება
+Title = სათაური
+Name = სახელი
+Properties = თვისებები
+Rename = გადარქმევა
+Delete = წაშლა
+Create = შექმნა
+Refresh = განახლება
+Class = კლასი
+Actions = აქტივობები
+Icon = იკონი(ლოგო)
+Default = ძირითადი
+Use DDE = DDE-ს(დინამიური მონაცემთა გაცვლა) გამოყენება
+DDE Message = DDE-ს(დინამიური მონაცემთა გაცვლა) წერილი
+Application = აპლიკაცია
+Application not running = აპლიკაცია არ არის გაშვებული
+Topic = თემა
+Executables = შემსრულებლები
+Perceived type = აღქმის ტიპი
+Other = სხვა
+Extension visibility = გაფართოების ხილვადობა
+Follow Explorer settings = მივყვეთ ექსპლორერის პარამეტრებს
+Always show extension = ყოველთვის გამოაჩინე გაფართოება
+Never show extension = არასდროს გამოაჩინო გაფართოება
+About = შესახებ
+Enter new extension (starting with dot) here = შეიყვანეთ ახალი გაფართოება(იწყება წერილით) აქ
+Class properties = კლასის 
+Add class = კლასის დამატება
+Delete class = კლასის წაშლა
+Filter = ფილტრი
+Disable filter = ფილტრის გაუქმება
+Add menu item = მენიუს პუნქტის დამატება
+Delete item = პუნქტის წაშლა
+Row text = row ტექსტი
+Select program = პროგრამის მონიშვნა
+Command = ბრძანება
+Remove icon = იკონის წაშლა
+Select icon file = იკონის ფაილის მონიშვნა
+Icon file = იკონის ფაილი
+Hidden = დამალული
+Special = სპეციალური
+All types = ყველა ტიპი
+Unknown = უცნობი
+Folder = ფოლდერი
+Rules = წესები
+Enable content rules = შინაარსის წესების ჩართვა
+Starts with: = იწყება
+Contains: = შეიცავს
+Add rule = წესის დამატება
+Delete rule = წესის წაშლა
+Rule name = წესის სახელი
+Matching method = მორგების მეთოდი
+Text to find = ტექსტი მოსაძებნად
+Access denied = შეღწევა უარყოფულია
+Run as administrator = გაშვება როგორც ადმინი
+
+[Setup]
+
+Types setup = Types-ის ინსტალაცია
+Install = ინსტალაცია
+Add to Control Panel = კონტროლ პანელში დამატება
+Start menu shortcut = სტარტის მალსახმობი
+Desktop shortcut = დესკტოპის მალსახმობი
+Where to put program files? = სად მოვათავსო პროგრამული ფაილები
+Done = მორჩა
+Add to context menus = კონტექსტ მენიუში დამატება
+Edit file type = ფაილის ტიპების რედაქტირება
+
+[Panel]
+
+PanelDescription = ფაილის ტიპების მართვა
+PanelKeywords = გაფართოებები;ასოციაციები;ტიპები;კლასე;იკონები;კონტექსტი;მენიუ;ექსპლორერი

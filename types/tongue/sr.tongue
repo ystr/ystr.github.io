@@ -1,0 +1,87 @@
+﻿Serbian (Srpski)
+
+[Main]
+
+Search = Pretraga
+Add = Dodaj
+Types = Types
+Classes = Klase
+Extensions = Ekstenzije
+Type = Tip
+Use linked class = Koristi povezanu klasu
+Title = Naslov
+Name = Naziv
+Properties = Svojstva
+Rename = Preimenuj
+Delete = Obriši
+Create = Napravi
+Refresh = Osveži
+Class = Klasa
+Actions = Akcija
+Icon = Ikona
+Default = Predefinisano
+Use DDE = Koristi DDE
+DDE Message = DDE poruka
+Application = Aplikacija
+Application not running = Aplikacija nije pokrenuta
+Topic = Tema
+Executables = Izvršne datoteke
+Perceived type = Pretpostavljeni tip
+Other = Ostalo
+Extension visibility = Vidljivost ekstenzije
+Follow Explorer settings = Po podešavanju Windowsa
+Always show extension = Uvek prikazuj ekstenziju
+Never show extension = Nikada ne prikazuj ekstenziju
+About = O programu
+License = Licenca
+Authors = Autori
+Manual = Uputstvo
+History = Istorija
+Enter new extension (starting with dot) here = Upišite novu ekstenziju (počevši sa tačkom)
+Class properties = Svojstva klase
+Add class = Dodaj klasu
+Delete class = Obriši klasu
+Filter = Filtriraj
+Disable filter = Poništi filter
+Add menu item = Dodaj stavku menija
+Delete item = Ukloni stavku menija
+Verb title = Naziv akcije
+Select program = Izaberi program
+Command = Komanda
+Remove icon = Ukloni ikonu
+Select icon file = Izaberi datoteku ikone
+Icon file = Datoteka ikone
+Hidden = Sakriveno
+Special types = Posebni tipovi
+Unknown = Nepoznato
+Folder = Fascikla
+Directory = Direktorijum
+LibraryFolder = Fascikla biblioteke
+Drive = Particija
+Rules = Pravila
+Enable content rules = Omogući pravila sadržaja
+Starts with: = Počinje sa:
+Contains: = Sadrži:
+Add rule = Dodaj pravilo
+Delete rule = Obriši pravilo
+Rule name = Naziv pravila
+Matching method = Odgovarajuća metoda
+Text to find = Tekst za pretragu
+Access denied = Pristup odbijen
+Run as administrator = Pokreni kao administrator
+
+[Setup]
+
+Types setup = Types instalacija
+Install = Instaliraj
+Add to Control Panel = Dodaj u kontrolnu tablu
+Start menu shortcut = Prečica u Start meniju
+Desktop shortcut = Prečica na radnoj površini
+Done = Završeno
+Add to context menus = Dodaj u kontekstni meni
+Edit file type = Izmeni tip datoteke
+
+[Panel]
+
+PanelDescription = Upravljanje tipovima datoteka
+PanelKeywords = ekstenzije;asocijacije;tipovi;klase;ikone;kontekst;meni;eksplorer

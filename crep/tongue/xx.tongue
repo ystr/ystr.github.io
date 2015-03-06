@@ -1,0 +1,22 @@
+YourLanguageName
+
+{AppName} setup = 
+Install = 
+Done = 
+Replace… = 
+Error: {ErrorCode} = 
+
+Replace = 
+Test = 
+Done. = 
+Files: = 
+Names: = 
+Errors: = 
+Case-sensitive = 
+Full words only = 
+Regular expression = 
+Include subfolders = 
+Replace in file names = 
+Replace in contents = 
+Skip hidden files = 
+Skip system files = 

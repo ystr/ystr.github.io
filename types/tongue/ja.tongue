@@ -1,0 +1,133 @@
+日本語
+
+[Main]
+
+Search = 検索
+Add = 追加
+
+Types = Types
+Classes = クラス
+Extensions = 拡張子
+Type = 種類
+Use linked class = クラスのリンクを使用
+Title = タイトル
+Name = 名前
+Properties = プロパティ
+Rename = リネーム
+Delete = 削除
+Create = 作成
+Refresh = 更新
+Class = クラス
+Actions = 動作
+Icon = アイコン
+Default = 既定
+Use DDE = DDE を使用
+DDE Message = DDE メッセージ
+Application = アプリケーション
+Application not running = アプリケーションが実行していない時
+Topic = トピック
+Executables = 実行形式
+Perceived type = 認識する種類
+Other = その他
+Extension visibility = 拡張子の表示
+Follow Explorer settings = エクスプローラの設定を継承
+Always show extension = 常に拡張子を表示する
+Never show extension = 拡張子を表示しない
+About = 
+License = ライセンス
+Authors = 作者
+Manual = マニュアル
+History = 履歴
+Enter new extension (starting with dot) here = 新たな拡張子を入力(ドットから)
+Class properties = クラスのプロパティ
+Add class = クラスを追加
+Delete class = クラスを削除
+Filter = フィルター
+Disable filter = フィルター無効
+Add menu item = メニュー項目を追加
+Delete item = 項目を削除
+Row text = テキスト行
+Select program = プログラムを選択
+Command = コマンド
+Remove icon = アイコンを除去
+Select icon file = アイコンファイルを選択
+Icon file = アイコンファイル
+Hidden = 隠す
+Special = 特殊指定
+All types = 全ての種類
+Unknown = 不明
+Folder = フォルダ
+Rules = 規則
+Enable content rules = コンテンツ規則を有効
+Starts with: = 開始:
+Contains: = 含む:
+Add rule = 規則を追加
+Delete rule = 規則を除去
+Rule name = 規則の名前
+Matching method = 合致するメソッド
+Text to find = 検索テキスト
+
+[Setup]
+
+Types setup = Types セットアップ
+Install = インストール
+Cancel = 中止
+Add to Control Panel = コントロールパネルに追加
+Start menu shortcut = スタートメニューのショートカット
+Desktop shortcut = デスクトップ・ショートカット
+Abort = 中断
+Close = 閉じる
+Types = Types
+Where to put program files? = Program files に追加しますか?
+Aborted by user = ユーザによる中断
+Done = 完了
+Fail = 失敗
+Already exists, backing up = バックアップは既に存在します
+Creating program folder = プログラムフォルダを作成中
+Already exists = 既に存在します
+Cannot create directory = ディレクトリの作成に失敗
+Extracting main executable = メイン実行ファイルを抽出中
+Extracting association proxy = プロキシを抽出中
+Cannot copy = コピー出来ません
+Applying settings = 設定を適用中
+Failed to modify registry = レジストリの更新に失敗
+Extracting control panel applet = コントロールパネル・アプレットを抽出中
+Registering control panel applet = コントロールパネル・アプレットを登録中
+Error registering control panel applet = コントロールパネル・アプレットの登録に失敗
+Creating desktop shortcut = デスクトップ・ショートカットを作成中
+Cannot add desktop shortcut = デスクトップ・ショートカットの作成に失敗
+Creating Start menu shortcut = スタートメニュー・ショートカットの作成
+Cannot add Start menu shortcut = スタートメニュー・ショートカット作成に失敗
+Extracting uninstaller = アンインストーラを抽出中
+Registering uninstaller = アンインストーラを登録中
+Failed to add uninstall entry = アンインストールエントリの追加に失敗
+Removing backup files = バックアップファイルを除去しています
+Installation completed = インストールが完了
+Rolling back = ロールバック
+Removing main executable = メイン実行ファイルを除去中
+Removing association proxy = 関連付けプロキシを除去中
+Removing uninstaller = アンインストーラを除去中
+Removing control panel applet = コントロールパネル・アプレットを除去中
+Restoring backup files = バックアップファイルを復元中
+Removing directory = ディレクトリを除去中
+Removing desktop shortcut = デスクトップ・ショートカットを除去中
+Removing Start menu shortcut = スタートメニュー・ショートカットを除去中
+Installation aborted = インストールの中断
+Add to context menus = コンテキストメニューに追加
+Adding context menu entry = コンテキストメニュー・エントリを追加中
+Cannot add context menu entry = コンテキストメニュー・エントリを追加できません
+Removing context menu entry = コンテキストメニュー・エントリを除去中
+Edit file type = ファイルの種類を編集
+Copying language packs = 言語パックをコピー中
+
+[Remove]
+
+Types removal = Types removal
+RemoveTypes? = 本当に Types を除去しますか?
+CheckNotRunning. = プログラムを確実に終了してください
+EraseSettings? = すべてのプログラム設定を削除しますか?
+RemovalDone. = Types はあなたのシステムから除去されました
+
+[Panel]
+
+PanelDescription = ファイル形式の管理

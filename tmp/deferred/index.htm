@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+
+<head>
+	
+	<title>Deferred lighting</title>
+	<meta charset='UTF-8'/>
+	
+	<style>
+		body { margin: 0; padding: 0; background: #FFF; }
+		#Eye { position: absolute; width: 100%; height: 100%; background: #000; }
+	</style>
+	
+	<script src='Clock.js'></script>
+	<script src='Sugar.js'></script>
+	<script src='Math.js'></script>
+	<script src='Texture.js'></script>
+	<script src='Cube.js'></script>
+	<script src='Eye.js'></script>
+	
+</head>
+
+<body>
+	
+	<canvas id='Eye'></canvas>
+	
+	<script>
+		
+		
+		TheScreen = new Eye(document.getElementById('Eye'));
+		TheScreen.Expo = 8;
+		
+		
+		RndRot = function ()
+		{
+			this.Axis = Norm({ X: R11(), Y: R11(), Z: R11() }, 1);
+			this.Angle = R01() * Math.PI;
+			
+			this.Update = function ()
+			{
+				this.Quat = new RotFromAxisAngle(this.Axis, this.Angle);
+			}
+			
+			this.Move = function ()
+			{
+				this.Angle += Clock.Factor;
+				this.Update();
+			}
+			
+			this.Update();
+		}
+		
+		
+		TestLight = function (r, g, b)
+		{
+			this.Color = { R: r, G: g, B: b };
+			this.DefaultPoint = { X: 0, Y: 0, Z: 3 };
+			this.Point = this.DefaultPoint;
+			
+			this.RndRot = new RndRot();
+			
+			this.Move = function ()
+			{
+				this.RndRot.Move();
+				this.Point = Rotate(this.DefaultPoint, this.RndRot.Quat);
+			}
+		}
+		
+		
+		InnerCube = new Cube(2, +1);
+		InnerCube.RndRot = new RndRot();
+		
+		OuterCube = new Cube(4, -1);
+		OuterCube.Children = [ InnerCube ];
+		
+		OuterCube.Lights = [
+			new TestLight(1, 0, 0),
+			new TestLight(0, 1, 0),
+			new TestLight(0, 0, 1),
+		];
+		
+		
+		CamPov = new Ve3(0, 0, 8);
+		CamRov = new Rot();
+		
+		
+		Clock.OnTick = function ()
+		{
+			InnerCube.RndRot.Move();
+			InnerCube.Rotation = InnerCube.RndRot.Quat;
+			for (var li in OuterCube.Lights) OuterCube.Lights[li].Move();
+			
+			TheScreen.Render(OuterCube, CamPov, CamRov);
+			TheScreen.Expose();
+		}
+		
+		
+		window.addEventListener("blur", Clock.Pause);
+		window.addEventListener("focus", Clock.Start);
+		window.addEventListener("load", Clock.Start);
+		
+		
+	</script>
+	
+</body>

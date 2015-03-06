@@ -1,0 +1,134 @@
+﻿Magyar
+
+[Main]
+
+Search = Keresés
+Add = Hozzáadás
+
+Types = Típusok
+Classes = Osztályok
+Extensions = Kiterjesztések
+Type = Típus
+Use linked class = Kapcsolt osztály használata
+Title = Cím
+Name = Név
+Properties = Tulajdonságok
+Rename = Átnevezés
+Delete = Törlés
+Create = Létrehozás
+Refresh = Frissítés
+Class = Osztály
+Actions = Műveletek
+Icon = Ikon
+Default = Alapértelmezett
+Use DDE = DDE használata
+DDE Message = DDE üzenet
+Application = Alkalmazás
+Application not running = Az alkalmazás nem fut
+Topic = Téma
+Executables = Futtatható állományok 
+Perceived type = Látható típus
+Other = Egyéb
+Extension visibility = Kitejesztés megjelenítése
+Follow Explorer settings = Intéző beállítások használata
+Always show extension = Mindíg mutassa a kiterjesztést
+Never show extension = Soha nem mutassa a kiterjesztést
+About = A programról
+License = Licensz
+Authors = Szerzők
+Manual = Útmutató
+History = Történet
+Enter new extension (starting with dot) here = Adja meg az új kiterjesztést (pont-tal kezdve)
+Class properties = Osztály tulajdonságai
+Add class = Osztály hozzáadása
+Delete class = Osztály törlése
+Filter = Szűrő
+Disable filter = Szűrő kikapcsolása
+Add menu item = Menüpont hozzadása
+Delete item = Menüpont törlése
+Row text = Sor szövege
+Select program = Alkalmzás kiválasztása
+Command = Parancs
+Remove icon = Ikon eltávolítása
+Select icon file = Ikon kiválasztása
+Icon file = Ikon
+Hidden = Rejtett
+Special = Speciális
+All types = Minden típus
+Unknown = Ismeretlen
+Folder = Könyvtár
+Rules = Szabályok
+Enable content rules = Tartalmi szabályok követése
+Starts with: = Kezdődik:
+Contains: = Tartalmazza:
+Add rule = Szabály hozzáadása
+Delete rule = Szabály törlése
+Rule name = Szabály neve
+Matching method = Egyezés módja
+Text to find = Keresendő szöveg
+
+[Setup]
+
+Types setup = Types telepítő
+Install = Telepítés
+Cancel = Mégsem
+Add to Control Panel = Hozzáadás a Vezérlőpulthoz
+Start menu shortcut = Hozzáadás a Start menühöz
+Desktop shortcut = Parancsikon az Asztalra
+Abort = Megszakítás
+Close = Bezárás
+Types = Types
+Where to put program files? = Hova telepítsem?
+Aborted by user = Felhasználó által megszakítva
+Done = Kész
+Fail = Hiba
+Already exists, backing up = Már létezik, visszagörgetés
+Creating program folder = Alkalmazás könyvtár létrehozása
+Already exists = Már létezik
+Cannot create directory = Könyvtár létrehozása sikertelen
+Extracting main executable = Fő alkalmazás kicsomagolása
+Extracting association proxy = Hozzárendelő proxy kicsomagolása
+Cannot copy = Másolás sikertelen
+Applying settings = Beállítások alkalmazása
+Failed to modify registry = Regisztrációs adatbázis módosítása sikertelen
+Extracting control panel applet = Vezérlőpult kisalkalmazás kicsomagolása
+Registering control panel applet = Vezérlőpult kisalkalmazás regisztrálása 
+Error registering control panel applet = Vezérlőpult kisalkalmazás regisztrálása sikertelen
+Creating desktop shortcut = Asztali parancsikon létrehozása
+Cannot add desktop shortcut = Asztali parancsikon létrehozása sikertelen
+Creating Start menu shortcut = Start menü hivatkozás létrehozása
+Cannot add Start menu shortcut = Start menü hivatkozás létrehozása sikertelen
+Extracting uninstaller = Eltávolító kicsomagolása
+Registering uninstaller = Eltávolító regisztrálása 
+Failed to add uninstall entry = Eltávolító regisztrálása sikertelen
+Removing backup files = Átmeneti fájlok eltávolítása
+Installation completed = Telepítés sikeres
+Rolling back = Visszagörgetés
+Removing main executable = Fő alkalmazás eltávolítása
+Removing association proxy = Hozzárendelő proxy eltávolítása
+Removing uninstaller = Eltávolító eltávolítása
+Removing control panel applet = Vezérlőpult kisalkalmazás eltávolítása
+Restoring backup files = Biztonsági mentés visszaállítása
+Removing directory = Könyvtár eltávolítása
+Removing desktop shortcut = Asztali parancsikon eltávolítása
+Removing Start menu shortcut = Start Menü hivatkozás eltávolítása
+Installation aborted = Telepítés megszakítva
+Add to context menus = Hozzáadás a környezeti menühöz
+Adding context menu entry = Környezeti menüpont hozzáadása
+Cannot add context menu entry = Környezeti menüpont hozzáadása sikertelen
+Removing context menu entry = Környezeti menüpont eltávolítása
+Edit file type = Fájltípus szerkesztése
+Copying language packs = Nyelvi csomagok másolása
+
+[Remove]
+
+Types removal = Típusok eltávolítása
+RemoveTypes? = Biztosan el akarja távolítani a programot?
+CheckNotRunning. = Győződjön meg róla hogy a program nem fut jelenleg.
+EraseSettings? = Törölni akar minden beálltást?
+RemovalDone. = A program sikeresen eltávolítva.
+
+[Panel]
+
+PanelDescription = Fájltípusok kezelése
+PanelKeywords = kiterjesztések;hozzárendelések;típusok;osztályok;ikonok;helyi menü;menü;intéző

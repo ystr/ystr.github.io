@@ -1,0 +1,345 @@
+############### MIPS ###############
+
+
+[=
+	# OOOOOO-- -------- -------- --------
+	
+	SPECIAL $00 BcondZ $01 J $02 JAL $03 BEQ $04 BNE $05 BLEZ $06 BGTZ $07
+	ADDI $08 ADDIU $09 SLTI $0A SLTIU $0B ANDI $0C ORI $0D XORI $0E LUI $0F
+	COP0 $10 COP1 $11 COP2 $12 COP3 $13
+	LB $20 LH $21 LWL $22 LW $23 LBU $24 LHU $25 LWR $26
+	SB $28 SH $29 SWL $2A SW $2B SWR $2E
+	LWC0 $30 LWC1 $31 LWC2 $32 LWC3 $33
+	SWC0 $38 SWC1 $39 SWC2 $3A SWC3 $3B
+	
+	# -------- -------- -------- --FFFFFF
+	
+	SLL $00 SRL $02 SRA $03 SLLV $04 SRLV $06 SRAV $07
+	JR $08 JALR $09 SYSCALL $0C BREAK $0D
+	MFHI $10 MTHI $11 MFLO $12 MTLO $13
+	MULT $18 MULTU $19 DIV $1A DIVU $1B 
+	ADD $20 ADDU $21 SUB $22 SUBU $23 AND $24 OR $25 XOR $26 NOR $27
+	SLT $2A SLTU $2B
+	
+	# ------SS SSSTTTTT DDDDDAAA AA------
+	
+	R0$ $00 AT$ $01 V0$ $02 V1$ $03 A0$ $04 A1$ $05 A2$ $06 A3$ $07
+	T0$ $08 T1$ $09 T2$ $0A T3$ $0B T4$ $0C T5$ $0D T6$ $0E T7$ $0F
+	S0$ $10 S1$ $11 S2$ $12 S3$ $13 S4$ $14 S5$ $15 S6$ $16 S7$ $17
+	T8$ $18 T9$ $19 K0$ $1A K1$ $1B GP$ $1C SP$ $1D FP$ $1E RA$ $1F
+	
+	# Special
+	
+	NOP $00000000
+]
+
+# 000000ss sssttttt dddddaaa aaffffff
+[= [enc-r f s t d a] [word [|
+	[<< [& s $1F] 21]
+	[<< [& t $1F] 16]
+	[<< [& d $1F] 11]
+	[<< [& a $1F] 6]
+	[<< [& f $3F] 0] ]]]
+
+# ooooooss sssttttt iiiiiiii iiiiiiii
+[= [enc-i o s t i] [word [|
+	[<< [& o $3F] 26]
+	[<< [& s $1F] 21]
+	[<< [& t $1F] 16]
+	[<< [& i $FFFF] 0] ]]]
+
+# ooooooii iiiiiiii iiiiiiii iiiiiiii
+[= [enc-j o i] [word [|
+	[<< [& o $3F] 26]
+	[<< [& i $3FFFFFF] 0] ]]]
+
+
+[= [half x] [int [& x $FFFF] 2]]
+[= [word x] [int [& x $FFFFFFFF] 4]]
+
+[= [hi x] [half [>> [int x] 16]]]
+[= [lo x] [half [int x]]]
+
+[= [absa a] [|| [virt a] a]]
+[= [rela a] [>> [- [phys a] [+ [phys [where]] 4]] 2]]
+
+[= [add d$ s$ t$] [enc-r ADD s$ t$ d$ 0]]
+[= [addi t$ s$ i] [enc-i ADDI s$ t$ i]]
+[= [addiu t$ s$ i] [enc-i ADDIU s$ t$ i]]
+[= [sub d$ s$ t$] [enc-r SUB s$ t$ d$ 0]]
+[= [subu d$ s$ t$] [enc-r SUB s$ t$ d$ 0]]
+
+[= [and d$ s$ t$] [enc-r AND s$ t$ d$ 0]]
+[= [or d$ s$ t$] [enc-r OR s$ t$ d$ 0]]
+[= [xor d$ s$ t$] [enc-r XOR s$ t$ d$ 0]]
+[= [ori t$ s$ i] [enc-i ORI s$ t$ i]]
+[= [nor d$ s$ t$] [enc-r NOR s$ t$ d$ 0]]
+[= [andi t$ s$ i] [enc-i ANDI s$ t$ i]]
+[= [xori t$ s$ i] [enc-i XORI s$ t$ i]]
+
+[= [sll d$ t$ i] [enc-r SLL 0 t$ d$ i]]
+[= [sra d$ t$ i] [enc-r SRA 0 t$ d$ i]]
+[= [srl d$ t$ i] [enc-r SRL 0 t$ d$ i]]
+
+[= [beq s$ t$ : i] [delay NOP [enc-i BEQ s$ t$ [rela [eval^ [car i]]]]]]
+[= [bne s$ t$ : i] [delay NOP [enc-i BNE s$ t$ [rela [eval^ [car i]]]]]]
+[= [bgtz s$ t$ : i] [delay NOP [enc-i BGTZ s$ t$ [rela [eval^ [car i]]]]]]
+[= [blez s$ t$ : i] [delay NOP [enc-i BLEZ s$ t$ [rela [eval^ [car i]]]]]]
+
+[= [j : i] [delay NOP [enc-j J [>> [absa [eval^ [car i]]] 2]]]]
+[= [jal : i] [delay NOP [enc-j JAL [>> [absa [eval^ [car i]]] 2]]]]
+[= [jalr s$] [enc-r JALR s$ 0 RA$ 0]]
+[= [jr s$] [enc-r JR s$ 0 0 0]]
+
+[= [lb t$ i s$] [enc-i LB s$ t$ i]]
+[= [lbu t$ i s$] [enc-i LBU s$ t$ i]]
+[= [lh t$ i s$] [enc-i LH s$ t$ i]]
+[= [lhu t$ i s$] [enc-i LHU s$ t$ i]]
+[= [lui t$ i] [enc-i LUI 0 t$ i]]
+[= [lw t$ i s$] [enc-i LW s$ t$ i]]
+[= [sb t$ i s$] [enc-i SB s$ t$ i]]
+[= [sh t$ i s$] [enc-i SH s$ t$ i]]
+[= [sw t$ i s$] [enc-i SW s$ t$ i]]
+
+[= [slt d$ s$ t$] [enc-r SLT s$ t$ d$ 0]]
+[= [sltu d$ s$ t$] [enc-r SLTU s$ t$ d$ 0]]
+[= [slti t$ s$ i] [enc-i SLTI s$ t$ i]]
+[= [sltiu t$ s$ i] [enc-i SLTIU s$ t$ i]]
+
+[= [mfhi d$] [enc-r MFHI 0 0 d$ 0]]
+[= [mflo d$] [enc-r MFLO 0 0 d$ 0]]
+[= [mult s$ t$] [enc-r MULT s$ t$ 0 0]]
+[= [multu s$ t$] [enc-r MULTU s$ t$ 0 0]]
+[= [div s$ t$] [enc-r DIV s$ t$ 0 0]]
+[= [divu s$ t$] [enc-r DIVU s$ t$ 0 0]]
+
+[= [li t$ i] [if
+	[<= [abs i] $FFFF] [ori t$ R0$ i]
+	else: [do [lui t$ [hi i]] [ori t$ t$ [lo i]]]
+]]
+
+[= [beqz t$ : i] [apply^ beq [list t$ R0$ [car i]]]]
+[= [bnez t$ : i] [apply^ bne [list t$ R0$ [car i]]]]
+[= [mov to$ fr$] [add to$ R0$ fr$]]
+[= [not r$] [nor r$ r$ R0$]]
+
+[= [li-sw i off base$] [li AT$ i] [sw AT$ off base$]]
+
+[= [save-regs regs]
+	[if regs [addiu SP$ SP$ [lo -[* [len regs] 4]]]]
+	[= i 0] [for reg: regs [sw reg [lo [* i 4]] SP$] [=+ i 1]] ]
+
+[= [pop-regs regs]
+	[= i 0] [for reg: regs [lw reg [lo [* i 4]] SP$] [=+ i 1]]
+	[if regs [addiu SP$ SP$ [lo [* [len regs] 4]]]] ]
+
+[= [block : &]
+	[= _regs [apply list [car &]]]
+	[save-regs _regs]
+	[evall [cdr &]] .:
+	[pop-regs _regs] ]
+
+[= [leaf : &] [apply^ block [cons [car &] [cdr &]]] [jr RA$] NOP]
+[= [proc : &] [apply^ leaf [cons [cons :RA$ [car &]] [cdr &]]]]
+
+[= [if-ne : &]
+	[beq [eval^ [car [car &]]] [eval^ [cadr [car &]]] next]
+	NOP [evall^ [cdr &]] next: [] ]
+
+[= [if-eq : &]
+	[bne [eval^ [car [car &]]] [eval^ [cadr [car &]]] next]
+	NOP [evall^ [cdr &]] next: [] ]
+
+[= [if-nez r$ : &do] [apply^ if-ne [cons [list r$ R0$] &do]]]
+[= [if-eqz r$ : &do] [apply^ if-eq [cons [list r$ R0$] &do]]]
+
+
+############### PSX ###############
+
+
+[=
+	KSEG0 $80000000
+	BIOS-RESERVED $10000
+	USER-RAM [+ KSEG0 BIOS-RESERVED]
+	HEADER-SIZE $800
+	
+	IO $1F800000
+	
+	GP0 [+ IO $1810]
+	GP1 [+ IO $1814]
+	
+	I-STAT [+ IO $1070]
+	I-MASK [+ IO $1074]
+]
+
+[=
+	GP0:FILL $02
+	GP0:QUAD-MONO-OPAQUE $28
+	GP0:TRI-SHADED-OPAQUE $30
+	GP0:TOP-LEFT $E3
+	GP0:BOTTOM-RIGHT $E4
+	GP0:OFFSET $E5
+	GP1:RESET $00
+	GP1:ENABLE $03
+	GP1:DISPSTART $05
+	GP1:HRANGE $06
+	GP1:VRANGE $07
+	GP1:DISPMODE $08
+]
+
+[= [gp c v] [| [<< c 24] [|| v $000000]]]
+[= [xy16 x y] [| [lo x] [<< [lo y] 16]]]
+[= [xy12 x y] [| x [<< y 12]]]
+[= [xy10 x y] [| x [<< y 10]]]
+
+[= Bios :[
+	[$A0 $4E gpu_sync]
+	[$A0 $2F rand]
+	[$A0 $30 srand 1] # (seed)
+	[$A0 $33 malloc 1] # (size)
+	[$A0 $34 free 1] # (ptr)
+	[$B0 $12 InitPad 4] # (buf1, siz1, buf2, siz2)
+	[$B0 $13 StartPad]
+	[$C0 $02 SysEnqIntRP 2] # (priority, struct)
+]]
+
+[= [call-bios : func]
+	[= b [find-one [λ [i] [== [nth i 2] [car func]]] Bios]]
+	[= blck [nth b 0] fval [nth b 1] argc [nth b 3]]
+	[if argc [addiu SP$ SP$ -[* argc 4]]]
+	[li T0$ blck] [li T1$ fval] [jalr T0$] NOP
+	[if argc [addiu SP$ SP$ [+ 0 [* argc 4]]]] ]
+
+
+[= [EnterCriticalSection] [li A0$ $01] [word SYSCALL]]
+[= [ExitCriticalSection] [li A0$ $02] [word SYSCALL]]
+
+[delay []
+	[align $800] :EOF
+	@$000 "PS-X EXE"
+	@$010 PC: Main
+	@$018 RamDst: USER-RAM
+	@$01C ExeSize: [- [phys EOF] HEADER-SIZE]
+	@$030 SPBase: $801FFF00
+]
+
+
+############### HELLO ###############
+
+
+[
+	ScrW: 320 CX: [lo [/ ScrW 2]]
+	ScrH: 240 CY: [lo [/ ScrH 2]]
+	
+	TvX: $260
+	TvY: $88
+	
+	IO$: GP$
+	Gl$: FP$
+	
+	BackColor: $000000
+]
+
+[= [set-global-regs] [li IO$ IO] [lui Gl$ [hi Globals]]]
+[= [g+ v off] [+ [- [virt v] [virt Globals]] [|| off 0]]]
+
+
+@HEADER-SIZE @@USER-RAM EXE:
+	
+	
+	Globals:
+		
+		DispBufX: $0000
+		DrawBufX: [lo ScrW]
+		
+		[align 4]
+	
+	
+	Render: [proc []
+		
+		[call-bios gpu_sync]
+		
+		[li-sw [gp GP0:TRI-SHADED-OPAQUE $00FF0000] GP0 IO$]
+		[li-sw [xy16 -64 +64] GP0 IO$]
+		[li-sw $0000FF00 GP0 IO$]
+		[li-sw [xy16 +00 -64] GP0 IO$]
+		[li-sw $000000FF GP0 IO$]
+		[li-sw [xy16 +64 +64] GP0 IO$]
+	]
+	
+	
+	Swap: [proc []
+		
+		[call-bios gpu_sync]
+		
+		[vars T0$ disp-x$ draw-x$ off$ o$]
+		
+		[lhu draw-x$ [g+ DrawBufX] Gl$]
+		[lhu disp-x$ [g+ DispBufX] Gl$]
+		
+		[addiu off$ draw-x$ CX]
+		
+		[li o$ [gp GP1:DISPSTART]] [or o$ o$ disp-x$] [sw o$ GP1 IO$]
+		[li o$ [gp GP0:OFFSET [<< CY 11]]] [or o$ o$ off$] [sw o$ GP0 IO$]
+		[li o$ [gp GP0:TOP-LEFT]] [or o$ o$ draw-x$] [sw o$ GP0 IO$]
+		
+		[li o$ [gp GP0:BOTTOM-RIGHT [<< [- ScrH 1] 10]]]
+		[or o$ o$ draw-x$]
+		[addiu o$ o$ [- ScrW 1]]
+		[sw o$ GP0 IO$]
+		
+		[sh draw-x$ [g+ DispBufX] Gl$]
+		[sh disp-x$ [g+ DrawBufX] Gl$]
+	]
+	
+	Clear: [proc []
+		
+		[call-bios gpu_sync]
+		
+		[li-sw [gp GP0:QUAD-MONO-OPAQUE BackColor] GP0 IO$]
+		[li-sw [xy16 -CX -CY] GP0 IO$]
+		[li-sw [xy16 +CX -CY] GP0 IO$]
+		[li-sw [xy16 -CX +CY] GP0 IO$]
+		[li-sw [xy16 +CX +CY] GP0 IO$]
+	]
+	
+	
+	OnVBlank: [proc []
+		
+		[set-global-regs]
+		
+		[jal Swap] NOP
+		[jal Clear] NOP
+		[jal Render] NOP
+	]
+	
+	VBlankStruct:
+		$00000000 $00000000
+		OnVBlank $00000000
+	
+	
+	Main:
+		
+		InitStuff:
+			
+			[set-global-regs]
+		
+		InitGPU:
+			
+			[li-sw GP1:RESET GP1 IO$]
+			[li-sw [gp GP1:DISPMODE %rhidmvhH] GP1 IO$]
+			[li-sw [gp GP1:HRANGE (xy12 TvX [+ TvX [* ScrW 8]])] GP1 IO$]
+			[li-sw [gp GP1:VRANGE (xy10 [- TvY CY] [+ TvY CY])] GP1 IO$]
+			[li-sw [gp GP1:ENABLE] GP1 IO$]
+		
+		InstallVblank:
+			
+			[EnterCriticalSection]
+			[mov A0$ R0$] [li A1$ [virt VBlankStruct]]
+			[call-bios SysEnqIntRP]
+			[li-sw 1 I-MASK IO$] NOP
+			[ExitCriticalSection]
+		
+		Forever:
+			
+			[j Forever] NOP

@@ -1,0 +1,134 @@
+Français
+
+[Main]
+
+Search = Rechercher
+Add = Ajouter
+
+Types = Types - Gestion des types de fichier
+Classes = Classes
+Extensions = Extensions
+Type = Type
+Use linked class = Utiliser la classe liée
+Title = Titre
+Name = Nom
+Properties = Propriétés
+Rename = Renommer
+Delete = Supprimer
+Create = Créer
+Refresh = Rafraîchir
+Class = Classe
+Actions = Actions
+Icon = Icône
+Default = Défaut
+Use DDE = Utiliser DDE
+DDE Message = Message DDE
+Application = Application
+Application not running = Application non active
+Topic = Sujet
+Executables = Exécutables
+Perceived type = Type perçu
+Other = Autres
+Extension visibility = Visibilité de l'extension
+Follow Explorer settings = Identique à la configuration de l'explorateur de fichiers
+Always show extension = Toujours visible
+Never show extension = Toujours masquée
+About = A propos de
+License = Licence
+Authors = Auteurs
+Manual = Manuel
+History = Historique
+Enter new extension (starting with dot) here = Enter une nouvelle extension (commençant avec un point) ici
+Class properties = Propriétés de la classe
+Add class = Ajouter une classe
+Delete class = Supprimer la classe
+Filter = Filtrer
+Disable filter = Désactiver le filtre
+Add menu item = Ajouter l'item menu
+Delete item = Supprimer l'item
+Row text = Type d'action
+Select program = Sélectionner le programme
+Command = Commande
+Remove icon = Supprimer l'icône
+Select icon file = Sélectionner le fichier de l'icône
+Icon file = Fichier icône
+Hidden = Masqué
+Special = Spécial
+All types = Tous les types
+Unknown = Inconnu
+Folder = Dossier
+Rules = Règles
+Enable content rules = Activer les règles de contenu
+Starts with: = Commence par:
+Contains: = Contient:
+Add rule = Ajouter la règle
+Delete rule = Supprimer la règle
+Rule name = Nom de la règle
+Matching method = Méthode de comparaison
+Text to find = Texte à chercher
+
+[Setup]
+
+Types setup = Types - Installation
+Install = Installation
+Cancel = Annuler
+Add to Control Panel = Ajouter au panneau de configuration
+Start menu shortcut = Raccourci dans le menu Démarrer
+Desktop shortcut = Raccourci sur le bureau
+Abort = Abandonner
+Close = Fermer
+Types = Types
+Where to put program files? = Où mettre le programme ?
+Aborted by user = Annulé par l'utilisateur
+Done = Fait
+Fail = Echec
+Already exists, backing up = Déjà existant, sauvegarde
+Creating program folder = Création du répertoire du programme
+Already exists = Déjà existant
+Cannot create directory = Ne peut pas créer le répertoire
+Extracting main executable = Extraction de l'exécutable
+Extracting association proxy = Extration du proxy d'association
+Cannot copy = Ne peut pas copier
+Applying settings = Applique la configuration
+Failed to modify registry = Echec de la modification de la base de registre
+Extracting control panel applet = Extraction de l'applet du panneau de configuration
+Registering control panel applet = Enregistrement de l'applet du panneau de configuration
+Error registering control panel applet = Erreur d'enregistrement de l'applet du panneau de configuration
+Creating desktop shortcut = Création du raccourci sur le bureau
+Cannot add desktop shortcut = Ne peut pas créer le raccourci sur le bureau
+Creating Start menu shortcut = Création du raccourci dans le menu Démarrer
+Cannot add Start menu shortcut = Ne peut pas créer le raccourci dans le menu Démarrer
+Extracting uninstaller = Extraction du désinstalleur
+Registering uninstaller = Enregistrement du désinstalleur
+Failed to add uninstall entry = Echec de l'ajout de l'entrée du désinstalleur
+Removing backup files = Suppression des fichier de sauvegarde
+Installation completed = Installation terminée
+Rolling back = 
+Removing main executable = Suppression de l'exécutable principal
+Removing association proxy = Suppression du proxy d'association
+Removing uninstaller = Suppression du désinstalleur
+Removing control panel applet = Suppression de l'applet du panneau de configuration
+Restoring backup files = Restauration des fichiers de sauvegarde
+Removing directory = Suppression du répertoire
+Removing desktop shortcut = Suppression du raccourci du bureau
+Removing Start menu shortcut = Suppression du raccourci dans le menu Démarrer
+Installation aborted = Installation annulée
+Add to context menus = Ajouter au menu contextuel
+Adding context menu entry = Ajout de l'entrée au menu contextuel
+Cannot add context menu entry = Ne peut pas ajouter l'entrée au menu contextuel
+Removing context menu entry = Suppression de l'entrée au menu contextuel
+Edit file type = Modifier le type de fichier
+Copying language packs = Copie du pack de langue
+
+[Remove]
+
+Types removal = Suppression du programme Types
+RemoveTypes? = Etes vous sûr de vouloir supprimer le programme Types ?
+CheckNotRunning. = Assurez vous que le programme Types ne tourne pas.
+EraseSettings? = Supprimer la configuration du programme Types ?
+RemovalDone. = Le programme Types a été supprimé de votre système.
+
+[Panel]
+
+PanelDescription = Gestion des types de fichier
+PanelKeywords = Type de fichier;Configuration;Extension des fichiers

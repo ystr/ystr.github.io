@@ -1,0 +1,55 @@
+############## X86 ################
+
+
+[=
+	MOV-R8-I8 $B0 MOV-R16-I16 $B8 MOV-S-R/M16 $8E
+	ADD-AX-I16 $05 JMP-REL8 $EB LODSB $AC
+	CMP-AL-I8 $3C JE $74 INT $CD
+	
+	AL $0 AX $0 EAX $0
+	CL $1 CX $1 ECX $1
+	DL $2 DX $2 EDX $2
+	BL $3 BX $3 EBX $3
+	AH $4 SP $4 ESP $4
+	CH $5 BP $5 EBP $5
+	DH $6 SI $6 ESI $6
+	BH $7 DI $7 EDI $7
+	
+	ES $0 CS $1 SS $2 DS $3 FS $4 GS $5
+	MOD-IND $00 MOD+8 $01 MOD+16 $02 MOD-DIR $3
+	
+	BIOS-PRINT-CHAR $0E
+	BIOS-INT-VIDEO $10
+	
+	BOOT-SEG $07C0
+	BOOT-MAGIC $AA55
+]
+
+
+[= [rel8 a b] [int [- [phys a] [phys b] 1] 1]]
+[= [derel8 : a] held: [delay $00 @held [rel8 [eval [car a]] [where]]]]
+[= [/r mod r/o r/m] [int [| [<< mod 6] [<< r/o 3] r/m] 1]]
+[= [mov-r8-i8 r i] [int [| MOV-R8-I8 r] 1] [int i 1]]
+[= [mov-r16-i16 r i] [int [| MOV-R16-I16 r] 1] [int i 2]]
+[= [mov-s-r/m16 s r] MOV-S-R/M16 [/r MOD-DIR s r]]
+[= [mov-r16-a16 r : a] [int [| MOV-R16-I16 r] 1] [delay $ACAB [eval a]]]
+[= [cmp-al-i8 i] CMP-AL-I8 [int i 1]]
+[pref ^: :derel8]
+
+
+############## HELLO ################
+
+
+[mov-r16-i16 AX BOOT-SEG]
+[mov-s-r/m16 DS AX]
+[mov-r8-i8 AH BIOS-PRINT-CHAR]
+[mov-r16-a16 SI Message]
+
+PrintChar:
+	LODSB [cmp-al-i8 0] JE ^Idle
+	INT BIOS-INT-VIDEO
+	JMP-REL8 ^PrintChar
+
+Idle: JMP-REL8 ^Idle
+Message: "Hello x86!" $00
+@$01FE BOOT-MAGIC

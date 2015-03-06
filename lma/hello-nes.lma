@@ -1,0 +1,212 @@
+######### 6502 #########
+
+
+[=
+	BRK $00 NOP $EA JSR $20 RTI $40 RTS $60
+	TXS $9A TSX $BA PHA $48 PLA $68 PHP $08 PLP $28
+	CLC $18 SEC $38 CLI $58 SEI $78 CLV $B8 CLD $D8 SED $F8
+	BPL $10 BMI $30 BVC $50 BVS $70 BCC $90 BCS $B0 BNE $D0 BEQ $F0
+	TAX $AA TXA $8A DEX $CA INX $E8 TAY $A8 TYA $98 DEY $88 INY $C8
+	ADC$ $6D ADC0 $65 ADC0X $75 ADC$X $7D ADC$Y $79 ADCX* $61 ADC*Y $71 ADC% $69
+	SBC$ $ED SBC0 $E5 SBC0X $F5 SBC$X $FD SBC$Y $F9 SBCX* $E1 SBC*Y $F1 SBC% $E9
+	AND$ $2D AND0 $25 AND0X $35 AND$X $3D AND$Y $39 ANDX* $21 AND*Y $31 AND% $29
+	ORA$ $0D ORA0 $05 ORA0X $15 ORA$X $1D ORA$Y $19 ORAX* $01 ORA*Y $11 ORA% $09
+	EOR$ $4D EOR0 $45 EOR0X $55 EOR$X $5D EOR$Y $59 EORX* $41 EOR*Y $51 EOR% $49
+	LDA$ $AD LDA0 $A5 LDA0X $B5 LDA$X $BD LDA$Y $B9 LDAX* $A1 LDA*Y $B1 LDA% $A9
+	CMP$ $CD CMP0 $C5 CMP0X $D5 CMP$X $DD CMP$Y $D9 CMPX* $C1 CMP*Y $D1 CMP% $C9
+	STA$ $8D STA0 $85 STA0X $95 STA$X $9D STA$Y $99 STAX* $81 STA*Y $91
+	LDX$ $AE LDX0 $A6 LDX0Y $B6 LDX$Y $BE LDX% $A2
+	LDY$ $AC LDY0 $A4 LDY0X $B4 LDY$X $BC LDY% $A0
+	ASL$ $0E ASL0 $06 ASL0X $16 ASL$X $1E ASLA $0A
+	LSR$ $4E LSR0 $46 LSR0X $56 LSR$X $5E LSRA $4A
+	ROL$ $2E ROL0 $26 ROL0X $36 ROL$X $3E ROLA $2A
+	ROR$ $6E ROR0 $66 ROR0X $76 ROR$X $7E RORA $6A
+	DEC$ $CE DEC0 $C6 DEC0X $D6 DEC$X $DE
+	INC$ $EE INC0 $E6 INC0X $F6 INC$X $FE
+	STX$ $8E STX0 $86 STX0Y $96
+	STY$ $8C STY0 $84 STY0X $94
+	CPX$ $EC CPX0 $E4 CPX% $E0
+	CPY$ $CC CPY0 $C4 CPY% $C0
+	BIT$ $2C BIT0 $24
+	JMP$ $4C JMP* $6C
+]
+
+
+[= [hi i] [lo [>> i 8]]]
+[= [lo i] [int [& i $FF] 1]]
+[= [rel a b] [lo [- [phys a] [phys b] 1]]]
+[= [.. : &] held: $00 [evall^ &] next: @held [rel next held] @next]
+[= [derel : a] held: [delay $00 @held [rel [eval [car a]] [where]]]]
+[pref ^: :derel]
+
+
+######### NES #########
+
+
+[=
+	PPUCTRL $2000
+	PPUMASK $2001
+	PPUSTATUS $2002
+	PPUSCROLL $2005
+	PPUADDR $2006
+	PPUDATA $2007
+	PPU-PALETTES $3F00
+]
+
+[= [wait-vblank] wait: BIT$ PPUSTATUS BPL [rel wait [where]]]
+[= [coo x y] [+ [* y 32] x]]
+
+
+######### HELLO #########
+
+
+[=
+	FULL-L $00 FULL-R $20
+	FULL-T $00 FULL-B $1C
+	
+	FIELD-L $08 FIELD-R $18
+	FIELD-T $06 FIELD-B $16
+	
+	PAGE0 $2000
+	CTRL0 %10010000
+	
+	ATTR $03C0
+]
+
+
+[vars $00
+	B L R T X Y
+	Tile0 TileInc
+	Page Attr Tile
+	DstHi DstLo
+]
+
+
+
+
+@$0010 @@$8000 PRG:
+	
+	
+	Palettes:
+		
+		BG0: $0F $16 $05 $27
+		BG1: $0F $0F $0F $0F
+		BG2: $0F $0F $0F $0F
+		BG3: $0F $00 $00 $00
+		SP0: $0F $00 $00 $00
+		SP1: $0F $00 $00 $00
+		SP2: $0F $00 $00 $00
+		SP3: $0F $00 $00 $00
+	
+	
+	SetTile:
+		
+		LDA0 Y [times 3 LSRA] ORA0 Page STA$ PPUADDR
+		LDA0 Y [times 5 ASLA] ORA0 X STA$ PPUADDR
+		
+		LDA0 Tile STA$ PPUDATA
+		
+		LDA0 Page CLC ADC% [hi ATTR] STA0 DstHi STA$ PPUADDR
+		LDA0 X [times 2 LSRA] CLC ADC% [lo ATTR] STA0 DstLo
+		LDA0 Y ASLA AND% %11111000 CLC ADC0 DstLo
+		STA0 DstLo STA$ PPUADDR
+		
+		LDX$ PPUDATA LDX$ PPUDATA
+		
+		LDA0 DstHi STA$ PPUADDR
+		LDA0 DstLo STA$ PPUADDR
+		
+		[vars $F0 mask attr]
+		
+		LDA% %00000011 STA0 mask
+		LDA0 Attr STA0 attr
+		
+		LDA% $02 BIT0 Y BEQ [.. [times 4 ASL0 mask ASL0 attr]]
+		LDA% $02 BIT0 X BEQ [.. [times 2 ASL0 mask ASL0 attr]]
+		
+		LDA0 mask EOR% $FF STA0 mask
+		TXA AND0 mask ORA0 attr STA$ PPUDATA
+		
+		RTS
+	
+	
+	FillRect:
+		LDA0 Tile0 STA0 Tile
+		LDA0 T STA0 Y
+		loop-y:
+			LDA0 L STA0 X
+			loop-x:
+				LDA% [hi PAGE0] STA0 Page JSR SetTile
+				LDA0 Tile ADC0 TileInc STA0 Tile
+				LDA0 X CLC ADC% $01 STA0 X
+				CMP0 R BNE ^loop-x
+			LDA0 Y CLC ADC% $01 STA0 Y
+			CMP0 B BNE ^loop-y
+		RTS
+	
+	
+	Main:
+		
+		SEI CLD LDX% $40 STX$ $4017 LDX% $FF TXS
+		INX STX$ PPUCTRL STX$ PPUMASK STX$ $4010
+		[times 2 [wait-vblank]]
+		
+		LDA% [hi PPU-PALETTES] STA$ PPUADDR
+		LDA% [lo PPU-PALETTES] STA$ PPUADDR
+		LDX% $00 move: LDA$X Palettes STA$ PPUDATA
+		INX CPX% $20 BNE ^move
+		
+		[= [tile-rect attr tile inc l t r b]
+			LDA% attr STA0 Attr
+			LDA% tile STA0 Tile0 LDA% inc STA0 TileInc
+			LDA% l STA0 L LDA% r STA0 R
+			LDA% t STA0 T LDA% b STA0 B
+			JSR FillRect
+		]
+		
+		[tile-rect $00 $00 $00 FULL-L FULL-T FULL-R FULL-B]
+		[tile-rect $00 $00 $01 FIELD-L FIELD-T FIELD-R FIELD-B]
+		
+		[wait-vblank]
+		LDA% $00 STA$ PPUSCROLL LDA% $F8 STA$ PPUSCROLL
+		LDA% CTRL0 STA$ PPUCTRL
+		LDA% %00011110 STA$ PPUMASK
+		idle: JMP$ idle
+
+
+@$4010 CHR:
+	
+	[= [peek] [if [< [phys] [len [rom]]] [get [phys] [rom]] !: $00]]
+	[= [chr-ti b t y] [+ [phys CHR] [* b $1000] [* t 16] y]]
+	[= [set-v bank x y v] [chr-set bank [sh-t x y] [% x 8] [% y 8] v]]
+	[= [sh-t x y] [+ [* [int [/ y 8]] 16] [int [/ x 8]]]]
+	
+	[= [chr-set b t x y v]
+		[= ti [chr-ti b t y] xx [- 7 x] mask [<< 1 xx]]
+		@[+ ti 0] [int [| [& [peek] [~ mask]] [<< [& [>> v 1] 1] xx]] 1]
+		@[+ ti 8] [int [| [& [peek] [~ mask]] [<< [& [>> v 0] 1] xx]] 1] ]
+	
+	[= [quantize f i]
+		[=* f i] [= ff [- f [floor f]]]
+		[int [+ f [if [>= ff [rand]] 1 :: 0]]] ]
+	
+	[say "Drawing test pattern"]
+	[for y: [[range 0 128]] [say "."]
+	[for x: [[range 0 128]]
+		[= cx [/ [- x 64] 64]] [= cy [/ [- y 64] 64]]
+		[= v [clamp 0 [- 1 [+ [* cx cx] [* cy cy]]] 1]]
+		[= g [if [|| [== [% x 8] 4] [== [% y 8] 4]] 1 :: 0]]
+		[set-v 1 x y [max g [quantize v 3]]] ]]
+
+
+@$400A Vectors:
+	
+	NMI: $0000
+	Reset: Main
+	IRQ: $0000
+
+
+@$0000 INESHeader:
+	
+	"NES" $1A $01 $01
+	$01 $00 $00 $00 $00 "=O.o="

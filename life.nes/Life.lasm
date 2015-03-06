@@ -1,0 +1,421 @@
+@$0000 INESHeader:
+	
+	"NES" $1A $01 $01
+	$01 $00 $00 $00 $00 "=^_^="
+
+
+
+
+[=
+	BRK $00 NOP $EA JSR $20 RTI $40 RTS $60
+	TXS $9A TSX $BA PHA $48 PLA $68 PHP $08 PLP $28
+	CLC $18 SEC $38 CLI $58 SEI $78 CLV $B8 CLD $D8 SED $F8
+	BPL $10 BMI $30 BVC $50 BVS $70 BCC $90 BCS $B0 BNE $D0 BEQ $F0
+	TAX $AA TXA $8A DEX $CA INX $E8 TAY $A8 TYA $98 DEY $88 INY $C8
+	ADC$ $6D ADC0 $65 ADC0X $75 ADC$X $7D ADC$Y $79 ADCX* $61 ADC*Y $71 ADC# $69
+	SBC$ $ED SBC0 $E5 SBC0X $F5 SBC$X $FD SBC$Y $F9 SBCX* $E1 SBC*Y $F1 SBC# $E9
+	AND$ $2D AND0 $25 AND0X $35 AND$X $3D AND$Y $39 ANDX* $21 AND*Y $31 AND# $29
+	ORA$ $0D ORA0 $05 ORA0X $15 ORA$X $1D ORA$Y $19 ORAX* $01 ORA*Y $11 ORA# $09
+	EOR$ $4D EOR0 $45 EOR0X $55 EOR$X $5D EOR$Y $59 EORX* $41 EOR*Y $51 EOR# $49
+	LDA$ $AD LDA0 $A5 LDA0X $B5 LDA$X $BD LDA$Y $B9 LDAX* $A1 LDA*Y $B1 LDA# $A9
+	CMP$ $CD CMP0 $C5 CMP0X $D5 CMP$X $DD CMP$Y $D9 CMPX* $C1 CMP*Y $D1 CMP# $C9
+	STA$ $8D STA0 $85 STA0X $95 STA$X $9D STA$Y $99 STAX* $81 STA*Y $91
+	LDX$ $AE LDX0 $A6 LDX0Y $B6 LDX$Y $BE LDX# $A2
+	LDY$ $AC LDY0 $A4 LDY0X $B4 LDY$X $BC LDY# $A0
+	ASL$ $0E ASL0 $06 ASL0X $16 ASL$X $1E ASLA $0A
+	LSR$ $4E LSR0 $46 LSR0X $56 LSR$X $5E LSRA $4A
+	ROL$ $2E ROL0 $26 ROL0X $36 ROL$X $3E ROLA $2A
+	ROR$ $6E ROR0 $66 ROR0X $76 ROR$X $7E RORA $6A
+	DEC$ $CE DEC0 $C6 DEC0X $D6 DEC$X $DE
+	INC$ $EE INC0 $E6 INC0X $F6 INC$X $FE
+	STX$ $8E STX0 $86 STX0Y $96
+	STY$ $8C STY0 $84 STY0X $94
+	CPX$ $EC CPX0 $E4 CPX# $E0
+	CPY$ $CC CPY0 $C4 CPY# $C0
+	BIT$ $2C BIT0 $24
+	JMP$ $4C JMP* $6C
+]
+
+
+
+
+[= [bra] SEC BCS]
+[= [wait-vblank] wait: BIT$ PPUSTATUS BPL ^wait]
+[= [bits &] [if & [do [let^ [cadr &] [<< $01 [car &]]] [apply^ bits [cddr &]]]]]
+[= [vars n &] [if & [do [let^ [car &] n] [apply^ vars [cons [+ n 1] [cdr &]]]]]]
+[= [.. &] held: $00 [evall^ &] next: @held [lo [- next held 1]] @next]
+[= [coo x y] [+ [* y 32] x]]
+
+
+
+
+[=
+	PPUCTRL $2000
+	PPUMASK $2001
+	PPUSTATUS $2002
+	OAMADDR $2003
+	OAMDATA $2004
+	PPUSCROLL $2005
+	PPUADDR $2006
+	PPUDATA $2007
+	OAMDMA $4014
+	SPRITES $0200
+	SPRITE-Y $00
+	SPRITE-TILE $01
+	SPRITE-FLAGS $02
+	SPRITE-X $03
+	PPU-PALETTES $3F00
+	PAD1 $4016
+	PAD2 $4017
+]
+
+[bits
+	7 PAD-A
+	6 PAD-B
+	5 PAD-SELECT
+	4 PAD-START
+	3 PAD-UP
+	2 PAD-DOWN
+	1 PAD-LEFT
+	0 PAD-RIGHT
+]
+
+
+[=
+	TILE-DEAD $00 TILE-LIVE $01 TILE-BORDER $03
+	
+	FIELD-L $02 FIELD-R $1E
+	FIELD-T $02 FIELD-B $1A
+	
+	PAGE0 $2000 CTRL0 %10010000
+	PAGE1 $2400 CTRL1 %10010001
+	
+	ATTR $03C0
+]
+
+
+[vars $00
+	
+	B L R T X Y
+	Page Attr Tile
+	
+	ThisPage ThisCtrl
+	ThatPage ThatCtrl
+	
+	Sr0Hi Sr1Hi Sr2Hi DstHi
+	Sr0Lo Sr1Lo Sr2Lo DstLo
+	
+	CurX CurY
+	Running
+	
+	Pad PrePad
+	Pressed Released
+]
+
+
+
+
+@$0010 #$8000 PRG:
+	
+	
+	Palettes:
+		
+		BG0: $0F $2C $16 $30
+		BG1: $0F $00 $10 $20
+		BG2: $0F $00 $10 $20
+		BG3: $0F $00 $10 $20
+		SP0: $0F $28 $28 $28
+		SP1: $0F $00 $00 $00
+		SP2: $0F $00 $00 $00
+		SP3: $0F $00 $00 $00
+	
+	
+	SetTile:
+		
+		LDA0 Y [times 3 LSRA] ORA0 Page STA$ PPUADDR
+		LDA0 Y [times 5 ASLA] ORA0 X STA$ PPUADDR
+		
+		LDA0 Tile STA$ PPUDATA
+		
+		LDA0 Page CLC ADC# [hi ATTR] STA0 DstHi STA$ PPUADDR
+		LDA0 X [times 2 LSRA] CLC ADC# [lo ATTR] STA0 DstLo
+		LDA0 Y ASLA AND# %11111000 CLC ADC0 DstLo
+		STA0 DstLo STA$ PPUADDR
+		
+		LDX$ PPUDATA LDX$ PPUDATA
+		
+		LDA0 DstHi STA$ PPUADDR
+		LDA0 DstLo STA$ PPUADDR
+		
+		[vars $F0 mask attr]
+		
+		LDA# %00000011 STA0 mask
+		LDA0 Attr STA0 attr
+		
+		LDA# $02 BIT0 Y BEQ [.. [times 4 ASL0 mask ASL0 attr]]
+		LDA# $02 BIT0 X BEQ [.. [times 2 ASL0 mask ASL0 attr]]
+		
+		LDA0 mask EOR# $FF STA0 mask
+		TXA AND0 mask ORA0 attr STA$ PPUDATA
+		
+		RTS
+	
+	
+	FillRect:
+		LDA0 T STA0 Y
+		loop-y:
+			LDA0 L STA0 X
+			loop-x:
+				LDA# [hi PAGE0] STA0 Page JSR SetTile
+				LDA# [hi PAGE1] STA0 Page JSR SetTile
+				LDA0 X CLC ADC# $01 STA0 X
+				CMP0 R BNE ^loop-x
+			LDA0 Y CLC ADC# $01 STA0 Y
+			CMP0 B BNE ^loop-y
+		RTS
+	
+	
+	SetScroll:
+		LDA# $00 STA$ PPUSCROLL LDA# $F8 STA$ PPUSCROLL
+		LDA0 ThisCtrl STA$ PPUCTRL
+		RTS
+	
+	SetPage:
+		
+		LDA0 ThatPage STA0 DstHi
+		LDA# [lo [coo FIELD-L FIELD-T]] STA0 DstLo
+		
+		LDA0 ThisPage
+		
+		STA0 Sr0Hi
+		STA0 Sr1Hi
+		STA0 Sr2Hi 
+		
+		LDA# [lo [coo [- FIELD-L 1] [- FIELD-T 1]]] STA0 Sr0Lo
+		LDA# [lo [coo [- FIELD-L 1] FIELD-T]] STA0 Sr1Lo
+		LDA# [lo [coo [- FIELD-L 1] [+ FIELD-T 1]]] STA0 Sr2Lo
+		
+		RTS
+	
+	
+	Main:
+		
+		prep:
+			
+		SEI CLD LDX# $40 STX$ $4017 LDX# $FF TXS
+		INX STX$ PPUCTRL STX$ PPUMASK STX$ $4010
+		[times 2 [wait-vblank]]
+		
+		load-palettes:
+			
+		LDA# [hi PPU-PALETTES] STA$ PPUADDR
+		LDA# [lo PPU-PALETTES] STA$ PPUADDR
+		LDX# $00 move: LDA$X Palettes STA$ PPUDATA
+		INX CPX# $20 BNE ^move
+		
+		reset-sprites:
+			
+		LDA# $FF LDX# $00
+		loop: STA$X SPRITES INX BNE ^loop
+		
+		set-cursor:
+			
+		LDA# $00
+		STA$ [+ SPRITES SPRITE-TILE]
+		STA$ [+ SPRITES SPRITE-FLAGS]
+		
+		draw-backdrops:
+			
+		LDA# $01 STA0 Attr
+		LDA# TILE-BORDER STA0 Tile
+		LDA# [- FIELD-L $02] STA0 L LDA# [+ FIELD-R $02] STA0 R
+		LDA# [- FIELD-T $02] STA0 T LDA# [+ FIELD-B $02] STA0 B
+		JSR FillRect
+		
+		LDA# $00 STA0 Attr
+		LDA# TILE-DEAD STA0 Tile
+		LDA# FIELD-L STA0 L LDA# FIELD-R STA0 R
+		LDA# FIELD-T STA0 T LDA# FIELD-B STA0 B
+		JSR FillRect
+		
+		init-globals:
+			
+		LDA# [hi PAGE0] STA0 ThisPage LDA# CTRL0 STA0 ThisCtrl
+		LDA# [hi PAGE1] STA0 ThatPage LDA# CTRL1 STA0 ThatCtrl
+		
+		LDA# [* [+ FIELD-L 1] $08] STA0 CurX
+		LDA# [* [+ FIELD-T 1] $08] STA0 CurY
+		
+		LDA# $00
+		STA0 Running
+		STA0 Pad
+		STA0 PrePad
+		STA0 Pressed
+		STA0 Released
+		
+		final:
+			
+		[wait-vblank] JSR SetScroll
+		LDA# %00011110 STA$ PPUMASK
+		forever: JMP$ forever
+	
+	
+	ReadPad:
+		
+		LDA0 Pad STA0 PrePad
+		
+		LDA# $01 STA$ PAD1 STA0 Pad
+		LDA# $00 STA$ PAD1
+		
+		bit: LDA$ PAD1 LSRA ROL0 Pad BCC ^bit
+		
+		LDA0 PrePad EOR# $FF AND0 Pad STA0 Pressed
+		LDA0 Pad EOR# $FF AND0 PrePad STA0 Released
+		
+		RTS
+	
+	
+	Start:
+		
+		LDA0 Running EOR# $01 STA0 Running
+		CMP# $01 BEQ [.. RTS]
+		
+		LDA# FIELD-L STA0 X
+		LDA# FIELD-T STA0 Y
+		
+		JSR SetPage
+		
+		RTS
+	
+	Process:
+		
+		LDA0 Pressed CMP# $00 BNE [.. RTS]
+		LDA# PAD-START BIT0 Pressed BEQ [.. JSR Start RTS]
+		LDA0 Running CMP# $01 BNE [.. RTS]
+		
+		LDA# PAD-RIGHT BIT0 Pressed BEQ [.. LDA0 CurX CLC ADC# $08 STA0 CurX]
+		LDA# PAD-LEFT BIT0 Pressed BEQ [.. LDA0 CurX SEC SBC# $08 STA0 CurX]
+		LDA# PAD-UP BIT0 Pressed BEQ [.. LDA0 CurY SEC SBC# $08 STA0 CurY]
+		LDA# PAD-DOWN BIT0 Pressed BEQ [.. LDA0 CurY CLC ADC# $08 STA0 CurY]
+		
+		LDA0 CurX CMP# [* $08 [- FIELD-L 1]] BNE [.. LDA# [* $08 FIELD-L] STA0 CurX]
+		LDA0 CurX CMP# [* $08 FIELD-R] BNE [.. LDA# [* $08 [- FIELD-R 1]] STA0 CurX]
+		LDA0 CurY CMP# [* $08 [- FIELD-T 1]] BNE [.. LDA# [* $08 FIELD-T] STA0 CurY]
+		LDA0 CurY CMP# [* $08 FIELD-B] BNE [.. LDA# [* $08 [- FIELD-B 1]] STA0 CurY]
+		
+		LDA0 CurX [times 3 LSRA] STA0 X
+		LDA0 CurY [times 3 LSRA] STA0 Y
+		
+		LDA0 ThisPage STA0 Page
+		
+		LDA# PAD-A BIT0 Pad BEQ [.. LDA# TILE-LIVE STA0 Tile JSR SetTile RTS]
+		LDA# PAD-B BIT0 Pad BEQ [.. LDA# TILE-DEAD STA0 Tile JSR SetTile RTS]
+		
+		RTS
+	
+	
+	UpdateCell:
+		
+		LDX0 X CPX# FIELD-R BNE ^update
+		
+		next-row:
+		
+		LDX# FIELD-L STX0 X
+		LDY0 Y INY CPY# FIELD-B BEQ ^next-page
+		STY0 Y
+		
+		CLC LDA0 DstLo ADC# $04 STA0 DstLo LDA0 DstHi ADC# $00 STA0 DstHi
+		CLC LDA0 Sr0Lo ADC# $04 STA0 Sr0Lo LDA0 Sr0Hi ADC# $00 STA0 Sr0Hi
+		CLC LDA0 Sr1Lo ADC# $04 STA0 Sr1Lo LDA0 Sr1Hi ADC# $00 STA0 Sr1Hi
+		CLC LDA0 Sr2Lo ADC# $04 STA0 Sr2Lo LDA0 Sr2Hi ADC# $00 STA0 Sr2Hi
+		
+		RTS
+		
+		next-page:
+		
+		LDY# FIELD-T STY0 Y
+		
+		LDX0 ThatCtrl LDY0 ThisCtrl STY0 ThatCtrl STX0 ThisCtrl
+		LDX0 ThatPage LDY0 ThisPage STY0 ThatPage STX0 ThisPage
+		
+		JSR SetPage
+		
+		RTS
+		
+		update:
+		
+		LDX# $00
+		
+		LDA0 Sr0Hi STA$ PPUADDR
+		LDA0 Sr0Lo STA$ PPUADDR LDA$ PPUDATA
+		LDA$ PPUDATA CMP# TILE-LIVE BNE [.. INX]
+		LDA$ PPUDATA CMP# TILE-LIVE BNE [.. INX]
+		LDA$ PPUDATA CMP# TILE-LIVE BNE [.. INX]
+		
+		LDA0 Sr1Hi STA$ PPUADDR
+		LDA0 Sr1Lo STA$ PPUADDR LDA$ PPUDATA
+		LDA$ PPUDATA CMP# TILE-LIVE BNE [.. INX]
+		LDY$ PPUDATA
+		LDA$ PPUDATA CMP# TILE-LIVE BNE [.. INX]
+		
+		LDA0 Sr2Hi STA$ PPUADDR
+		LDA0 Sr2Lo STA$ PPUADDR LDA$ PPUDATA
+		LDA$ PPUDATA CMP# TILE-LIVE BNE [.. INX]
+		LDA$ PPUDATA CMP# TILE-LIVE BNE [.. INX]
+		LDA$ PPUDATA CMP# TILE-LIVE BNE [.. INX]
+		
+		LDA0 DstHi STA$ PPUADDR LDA0 DstLo STA$ PPUADDR
+		CPX# $02 BEQ ^same CPX# $03 BEQ ^live
+		kill: LDY# TILE-DEAD [bra] ^same
+		live: LDY# TILE-LIVE same:
+	
+		STY$ PPUDATA
+		
+		INC0 X
+		INC0 DstLo
+		INC0 Sr0Lo
+		INC0 Sr1Lo
+		INC0 Sr2Lo
+	
+		RTS
+	
+	
+	Render:
+		
+		LDA0 Running CMP# $01 BNE ^idle
+		
+		[times 7 JSR UpdateCell]
+		
+		LDA# $FF STA$ [+ SPRITES SPRITE-X]
+		LDA# $FF STA$ [+ SPRITES SPRITE-Y]
+		
+		[bra] ^done
+			
+		idle:
+			
+		LDA0 CurY CLC ADC# $07 STA$ [+ SPRITES SPRITE-Y]
+		LDA0 CurX STA$ [+ SPRITES SPRITE-X]
+		
+		done:
+		
+		JSR ReadPad
+		JSR Process
+		
+		LDA# [lo SPRITES] STA$ OAMADDR
+		LDA# [hi SPRITES] STA$ OAMDMA
+		
+		JSR SetScroll
+		
+		RTI
+
+
+@$400A Vectors:
+
+	NMI: Render
+	Reset: Main
+	IRQ: $0000
+
+
+@$4010 CHR:
+	
+	[load "CHR"]

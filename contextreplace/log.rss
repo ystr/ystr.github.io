@@ -1,0 +1,11 @@
+<rss version='2.0'><channel>
+	
+	<title>ContextReplace</title>
+	<link>http://ystr.github.io/contextreplace/</link>
+	
+	<item><guid>0.3.1</guid><title>0.3.1</title><description>Fix backslashes break renaming on Linux.</description></item>
+	<item><guid>0.3.0</guid><title>0.3.0</title><description></description></item>
+	<item><guid>0.2.1</guid><title>0.2.1</title><description>Fix non-hidden files inside hidden dirs not skipped.</description></item>
+	<item><guid>0.2.0</guid><title>0.2.0</title><description>Fix regex crash</description></item>
+	
+</channel></rss>

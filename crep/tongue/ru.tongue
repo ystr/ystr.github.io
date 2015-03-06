@@ -1,0 +1,22 @@
+Русский
+
+{AppName} setup = Установка {AppName}
+Install = Установить
+Done = Готово
+Replace… = Заменить…
+Error: {ErrorCode} = Ошибка: {ErrorCode}
+
+Replace = Замена
+Test = Тест
+Done. = Готово.
+Files: = Файлы:
+Names: = Имена:
+Errors: = Ошибки:
+Case-sensitive = Учитывать регистр
+Full words only = Только целые слова
+Regular expression = Регулярное выражение
+Include subfolders = Вложенные папки
+Replace in file names = Заменять в именах
+Replace in contents = Заменять в содержимом
+Skip hidden files = Пропускать скрытые
+Skip system files = Пропускать системные

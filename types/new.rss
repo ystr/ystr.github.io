@@ -1,0 +1,15 @@
+<rss version='2.0'><channel>
+	
+	<title>Types</title>
+	<link>http://ystr.github.io/apps/types/</link>
+	
+	<item><guid>2.6.5</guid><title>Types 2.6.5</title><description>Fixed crash on deleting an action while renaming it.</description><link>http://ystr.github.io/apps/types/</link><pubDate>4 Dec 2017 17:00:00 +0400</pubDate></item>
+	<item><guid>2.6.4</guid><title>Types 2.6.4</title><description>Reverse combo box history.</description><link>http://ystr.github.io/apps/types/</link></item>
+	<item><guid>2.6.3</guid><title>Types 2.6.3</title><description>Fixed Esc key not working in some windows.</description><link>http://ystr.github.io/apps/types/</link></item>
+	<item><guid>2.6.2</guid><title>Types 2.6.2</title><description>Fixed action title and command settings have no effect under certain circumstances.</description><link>http://ystr.github.io/apps/types/</link><pubDate>23 Apr 2016 23:00:00 +0400</pubDate></item>
+	<item><guid>2.6.1</guid><title>Types 2.6.1</title><description>Some UI fixes.</description><link>http://ystr.github.io/apps/types/</link><pubDate>31 Mar 2016 14:00:00 +0400</pubDate></item>
+	<item><guid>2.6.0</guid><title>Types 2.6.0</title><description>About button added.</description><link>http://ystr.github.io/apps/types/</link><pubDate>21 Feb 2016 21:00:00 +0400</pubDate></item>
+	<item><guid>2.5.1</guid><title>Types 2.5.1</title><description>Minor perceived type fix.</description><link>http://ystr.github.io/apps/types/</link><pubDate>26 Dec 2015 23:00:00 +0400</pubDate></item>
+	<item><guid>2.5.0</guid><title>Types 2.5.0</title><description>Perceived type is back. Fixed: delete and edit buttons enabled when no item is selected.</description><link>http://ystr.github.io/apps/types/</link><pubDate>26 Dec 2015 00:00:00 +0400</pubDate></item>
+	
+</channel></rss>

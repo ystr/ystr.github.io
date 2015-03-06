@@ -1,0 +1,15 @@
+<rss version='2.0'><channel>
+	
+	<title>Daub</title>
+	<link>http://ystr.github.io/daub/</link>
+	
+	<item><guid>0.7.0</guid><title>0.7.0</title><description>1px brush hotkey; margins are back; fixed layer keys.</description></item>
+	<item><guid>0.6.0</guid><title>0.6.0</title><description>Subpixel brush.</description></item>
+	<item><guid>0.5.0</guid><title>0.5.0</title><description>Control margins removed; installer fixed.</description></item>
+	<item><guid>0.4.0</guid><title>0.4.0</title><description>Image display switched back from square to fill; all buttons removed; fixed brush size not updated on revert; export dialog removed.</description></item>
+	<item><guid>0.3.1</guid><title>0.3.1</title><description>Switched to bicubic (bilinear caused artifacts on Windows); fixed cursor size not updating on resolution change; fixed extra refreshes when drawing.</description></item>
+	<item><guid>0.3.0</guid><title>0.3.0</title><description>Selecting top layer by default.</description></item>
+	<item><guid>0.2.0</guid><title>0.2.0</title><description>Fixed color picker in fullscreen on Windows (Wayland partially fixed); pick from active layer.</description></item>
+	<item><guid>0.1.0</guid><title>0.1.0</title><description>Image display changed to square; buttons added.</description></item>
+	
+</channel></rss>

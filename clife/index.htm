@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	
+	<head>
+		
+		<meta http-equiv="Content-type" content="text/html; Charset=UTF-8"/>
+		
+		<title>Conway’s Life with competing species</title>
+		
+		<style type="text/css">
+			
+			body { padding: 1em; }
+			
+			fieldset { border: none; }
+			fieldset span { margin-right: 1em; }
+			
+			table { border-collapse: collapse; margin: 1em 0; }
+			
+			#rig td { border: 1px solid silver; }
+			#rig td div { display: block; width: 8px; height: 8px; }
+			
+			td.c0 { background: #FFF; }
+			td.c1 { background: #0A0; }
+			td.c2 { background: #C00; }
+			
+			span.c1 { color: #0A0; }
+			span.c2 { color: #C00; }
+			
+		</style>
+		
+		<link rel="shortcut icon" href="lives.ico"/>
+		
+	</head>
+	
+	<body>
+		
+		<noscript><div style="font: 3em bold; color: #F00;">This page requires JavaScript to run.</div></noscript>
+		
+		<fieldset class="options">
+			
+			<span>
+				<input id="width" size="2" value="64"/> &times;
+				<input id="height" size="2" value="32"/>
+				<input type="button" value="New" onclick="newClicked()"/>
+			</span>
+			
+			<span>
+				<input type="button" value="Clear" onclick="clearClicked()"/>
+				<input type="button" value="Random" onclick="randClicked()"/>
+			</span>
+			
+			<span>
+				<input type="button" id="start" value="Start" onclick="startClicked()"/>
+				<input type="button" id="next" value="Next" onclick="next()"/>
+				<input type="button" id="stop" value="Stop" onclick="stopClicked()"/>
+			</span>
+			
+			<span>
+				<label for="torus"><input type="checkbox" id="torus" onclick="torusClicked()"/>Torus</label>
+			</span>
+			
+		</fieldset>
+		
+		<table id="rig"><tr><td></td></tr></table>
+		
+		<div class="legend">
+			<span class="c2">Ctrl</span> +
+			<span class="c1">Click</span>
+		</div>
+		
+	</body>
+	
+	<script type="text/javascript">
+		
+		function id (id)
+		{
+			return document.getElementById(id);
+		}
+		
+		var map, buf;
+		var cols, rows;
+		var torus = false;
+		var rig = id('rig');
+		var auto;
+		
+		function newClicked ()
+		{
+			w = parseInt(id('width').value);
+			h = parseInt(id('height').value);
+			if (w && h) prepare(w, h);
+		}
+		
+		function startClicked ()
+		{
+			auto = true;
+			state();
+			next();
+		}
+		
+		function stopClicked ()
+		{
+			auto = false;
+			state();
+		}
+		
+		function randClicked () { clear(3); }
+		function clearClicked () { clear(0); }
+		
+		function clear (rand)
+		{
+			rand += 1;
+			
+			for (var y = 0; y < rows; y++)
+			{
+				for (var x = 0; x < cols; x++)
+				{
+					map[x][y] = Math.floor(Math.random() * rand);
+					show(x, y);
+				}
+			}
+		}
+		
+		function torusClicked ()
+		{
+			torus = id('torus').checked;
+		}
+		
+		function state ()
+		{
+			id('start').disabled = id('next').disabled = auto;
+			id('stop').disabled = !auto;
+		}
+		
+		function make (w, h)
+		{
+			var pig = new Array(w);
+			
+			for (var x = 0; x < w; x++)
+			{
+				pig[x] = new Array(h);
+				
+				for (var y = 0; y < h; y++)
+				{
+					pig[x][y] = 0;
+				}
+			}
+			
+			return pig;
+		}
+		
+		function copy ()
+		{
+			for (var x = 0; x < cols; x++)
+			{
+				for (var y = 0; y < rows; y++)
+				{
+					buf[x][y] = map[x][y];
+				}
+			}
+		}
+		
+		function prepare (w, h)
+		{
+			map = make(w, h);
+			buf = make(w, h);
+			
+			while (rig.rows.length) rig.deleteRow(0);
+			
+			for (var y = 0; y < h; y++)
+			{
+				var row = rig.insertRow(y);
+				
+				for (var x = 0; x < w; x++)
+				{
+					var cell = row.insertCell(x);
+					cell.setAttribute('onclick', 'toggle(event, ' + x + ', ' + y + ')');
+					cell.innerHTML = '<div></div>'; // Yiff in hell, Firefox!
+					show(x, y);
+				}
+			}
+			
+			cols = w;
+			rows = h;
+			
+			auto = false;
+			
+			state();
+		}
+		
+		function show (x, y)
+		{
+			rig.rows[y].cells[x].className = 'c' + map[x][y];
+		}
+		
+		function toggle (e, x, y)
+		{
+			var c = map[x][y];
+			
+			var alt = e.ctrlKey;
+			
+			if (alt) if (c != 2) c = 2; else c = 1;
+			else if (c > 0) c = 0;
+			else c = 1;
+			
+			map[x][y] = c;
+			
+			show(x, y);
+		}
+		
+		function probe (x, y)
+		{
+			if (torus)
+			{
+				if (x < 0) x = cols - 1;
+				else if (x == cols) x = 0;
+				if (y < 0) y = rows - 1;
+				else if (y == rows) y = 0;
+			}
+			
+			else if (x < 0 || y < 0 || x >= cols || y >= rows) return 0;
+			
+			return buf[x][y];
+		}
+		
+		function collect (x, y)
+		{
+			var out = new Array(0, 0, 0);
+			
+			out[probe(x - 1, y - 1)]++;
+			out[probe(x - 1, y)]++;
+			out[probe(x - 1, y + 1)]++;
+			out[probe(x, y - 1)]++;
+			out[probe(x, y + 1)]++;
+			out[probe(x + 1, y - 1)]++;
+			out[probe(x + 1, y)]++;
+			out[probe(x + 1, y + 1)]++;
+			
+			return out;
+		}
+		
+		function next ()
+		{
+			copy();
+			
+			for (var y = 0; y < rows; y++)
+			{
+				for (var x = 0; x < cols; x++)
+				{
+					var c = buf[x][y];
+					var n = collect(x, y);
+					
+					if (n[1] == n[2]) var max = 0;
+					else if (n[1] > n[2]) var max = 1;
+					else var max = 2;
+					
+					var set = 0;
+					
+					if (max > 0)
+					{
+						if (c == 0 && n[max] == 3) map[x][y] = max;
+						else if (n[max] < 2 || n[max] > 3) map[x][y] = 0;
+						else if (c > 0 && c != max) map[x][y] = max;
+					}
+					
+					else map[x][y] = 0;
+					
+					show(x, y);
+				}
+			}
+			
+			if (auto) setTimeout(next, 100);
+		}
+		
+		prepare(64, 32);
+		
+	</script>
+	
+</html>

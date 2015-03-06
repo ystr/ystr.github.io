@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+
+<head>
+	
+	<title>balls</title>
+	<meta charset='UTF-8'/>
+	
+	<style>
+		body { margin: 0; padding: 0; background: #000; }
+		#Screen { position: absolute; width: 100%; height: 100%; }
+	</style>
+	
+	<script src='Math.js'></script>
+	<script src='Clock.js'></script>
+	<script src='Screen.js'></script>
+	<script src='Thing.js'></script>
+	
+</head>
+
+<body>
+	
+	<canvas id='Screen'></canvas>
+	
+	<script>
+		
+		
+		Earth = new Thing ({
+			Location: { X: 0, Y: 0 },
+			Radius: 6371, Color: 'Cyan'
+		});
+		
+		
+		Earth.AngVel = 0.1;
+		Earth.AngRot = PIE;
+		Earth.Gravity = 30000000000;
+		
+		
+		BuildingHeight = Earth.Radius + 5000;
+		
+		
+		Ball1 = new Thing ({
+			Location: { X: 0, Y: BuildingHeight },
+			Velocity: { X: Earth.AngVel * BuildingHeight, Y: 0 },
+			Radius: 300, Color: 'Red'
+		});
+		
+		Ball2 = new Thing ({
+			Location: { X: 0, Y: Earth.Radius },
+			Velocity: { X: Earth.AngVel * Earth.Radius, Y: 2000 },
+			Radius: 300, Color: 'Green'
+		});
+		
+		
+		TheScreen = new Screen('Screen');
+		TheScreen.Zoom = 0.75 / Ball1.Location.Y;
+		
+		
+		ProcessBall = function (o)
+		{
+			let force = new Norm (
+				Sub(Earth.Location, o.Location),
+				Earth.Gravity / Qis(Earth.Location, o.Location)
+			);
+	
+			o.Acceleration.X = force.X;
+			o.Acceleration.Y = force.Y;
+			
+			o.Velocity.X += o.Acceleration.X * Clock.Factor;
+			o.Velocity.Y += o.Acceleration.Y * Clock.Factor;
+			
+			o.Location.X += o.Velocity.X * Clock.Factor;
+			o.Location.Y += o.Velocity.Y * Clock.Factor;
+			
+			o.Draw(TheScreen);
+		}
+		
+		
+		Clock.OnTick = () =>
+		{
+			TheScreen.Clear();
+			
+			ProcessBall(Ball1);
+			ProcessBall(Ball2);
+			
+			Earth.AngRot += Earth.AngVel * Clock.Factor;
+			Earth.Draw(TheScreen);
+			
+			TheScreen.DrawLine (
+				{ X: 0, Y: 0 },
+				Rotate({ X: 0, Y: BuildingHeight }, Earth.AngRot),
+				"Cyan"
+			);
+			
+		}
+		
+		
+		window.addEventListener("load", Clock.Start);
+		
+		
+	</script>
+	
+</body>

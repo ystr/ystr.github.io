@@ -1,0 +1,133 @@
+﻿Português (Brasil)
+
+[Main]
+
+Search = Localizar
+Add = Adicionar
+
+Types = Tipos 
+Classes = Classes
+Extensions = Extensões
+Type = Tipo
+Use linked class = Usar classe vinculada
+Title = Título
+Name = Nome
+Properties = Propriedades 
+Rename = Renomear
+Delete = Apagar
+Create = Criar
+Refresh = Atualizar
+Class = Classe
+Actions = Ações
+Icon = Ícone
+Default = Padrão
+Use DDE = Usar DDE
+DDE Message = Mensagem DDE
+Application = Aplicativo
+Application not running = Aplicativo não sendo executado
+Topic = Tópico
+Executables = Executáveis
+Perceived type = Tipo de percepção
+Other = Outro
+Extension visibility = Visibilidade da extensão
+Follow Explorer settings = Ajustes do Explorer  
+Always show extension = Sempre mostrar extensão
+Never show extension = Nunca mostrar extensão
+About = Sobre
+License = Licença
+Authors = Autores
+Manual = Manual
+History = Histórico
+Enter new extension (starting with dot) here = Insira a nova extensão (iniciando por ponto) aqui
+Class properties = Propriedades da classe
+Add class = Adicionar classe
+Delete class = Remover classe
+Filter = Filtro
+Disable filter = Desativar filtro
+Add menu item = Adicionar item de menu
+Delete item = Apagar item
+Row text = Texto da linha
+Select program = Selecionar programa
+Command = Comando
+Remove icon = Remover ícone
+Select icon file = Selecionar ícone
+Icon file = Ícone
+Hidden = Oculto
+Special = Especial
+All types = Todos os tipos
+Unknown = Desconhecido
+Folder = Pasta
+Rules = Regras
+Enable content rules = Habilitar regras de conteúdo
+Starts with: = Inicia com:
+Contains: = Contém
+Add rule = Adicionar regra
+Delete rule = Remover regra
+Rule name = Nome da regra
+Matching method = Método de combinação
+Text to find = Texto a localizar
+
+[Setup]
+
+Types setup = Instalação do Types
+Install = Instalar
+Cancel = Cancelar
+Add to Control Panel = Adicionar ao Painel de Controle
+Start menu shortcut = Atalho no Menu Iniciar
+Desktop shortcut = Atalho na Área de Trabalho
+Abort = Cancelar
+Close = Fechar
+Types = Types
+Where to put program files? = Onde colocar os arquivos do programa?
+Aborted by user = Cancelado pelo usuário
+Done = Concluído
+Fail = Falha
+Already exists, backing up = Já existe, criando backup
+Creating program folder = Criando pasta do programa
+Already exists = Já existe
+Cannot create directory = Não foi possível criar pasta
+Extracting main executable = Extraindo executável principal
+Extracting association proxy = Extraindo proxy de associação
+Cannot copy = Não é possível copiar
+Applying settings = Aplicando configurações
+Failed to modify registry = Falha ao modificar registro
+Extracting control panel applet = Extraindo aplicação do Painel de Controle
+Registering control panel applet = Registrando aplicação do Painel de Controle
+Error registering control panel applet = Erro ao registrar aplicação do Painel de Controle
+Creating desktop shortcut = Criando atalho na Área de Trabalho
+Cannot add desktop shortcut = Não foi possível adicionar atalho na Área de Trabalho
+Creating Start menu shortcut = Criando atalho no Menu Iniciar
+Cannot add Start menu shortcut = Não foi possível adicionar atalho no Menu Iniciar
+Extracting uninstaller = Extraindo desinstalador
+Registering uninstaller = Registrando desinstalador
+Failed to add uninstall entry = Falha ao adicionar entrada de desinstalação
+Removing backup files = Removendo arquivos de backup
+Installation completed = Instalação completa
+Rolling back = Revertendo
+Removing main executable = Removendo executável principal
+Removing association proxy = Removendo proxy de associação
+Removing uninstaller = Removendo desinstalador
+Removing control panel applet = Removendo aplicação do Painel de Controle
+Restoring backup files = Restaurando arquivos de backup
+Removing directory = Removendo pasta
+Removing desktop shortcut = Removendo atalho na Área de Trabalho
+Removing Start menu shortcut = Removendo atalho do Menu Inciar
+Installation aborted = Instalação cancelada
+Add to context menus = Adicionar ao menu de contexto
+Adding context menu entry = Adicionando entrada ao menu de contexto
+Cannot add context menu entry = Não foi possível adicionar entrada ao menu de contexto
+Removing context menu entry = Removendo entrada do menu de contexto
+Edit file type = Editar tipo de arquivo
+Copying language packs = Copiando pacotes de idioma
+
+[Remove]
+
+Types removal = Remoção do Types 
+RemoveTypes? = Tem certeza que deseja remover o Types?
+CheckNotRunning. = Certifique-se que o programa não está em execução.
+EraseSettings? = Remover todas as configurações do programa?
+RemovalDone. = O Types foi removido do sistema.
+
+[Panel]
+
+PanelDescription = Gerencie tipos de arquivos

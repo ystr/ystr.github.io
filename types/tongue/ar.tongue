@@ -1,0 +1,131 @@
+﻿اللغة العربية
+
+
+[Main]
+
+Types = الانواع
+Classes = فئات
+Extensions = الامتدادات
+Type = النوع
+Use linked class = استخدم الفئة المرتبطة
+Title = العنوان
+Name = الاسم
+Properties = الخصائص
+Rename = اعادة تسمية
+Delete = حذف
+Create = انشاء
+Refresh = تحديث
+Class = فئة
+Actions = احداث
+Icon = ايقونة
+Default = الافتراضي
+Use DDE = استخدام DDE
+DDE Message = رسالة DDE
+Application = تطبيق
+Application not running = التتطبيق لا يعمل
+Topic = موضوع
+Executables = قابل للتنفيذ
+Perceived type = النوع المراد
+Other = اخرى
+Extension visibility = رؤية الامتداد
+Follow Explorer settings = اتباع اعدادات المستكشف
+Always show extension = اظهار الامتداد دائماً
+Never show extension = عدم اظهار الامتداد
+About = نبذة
+License = رخصة
+Authors = مؤلفين
+Manual = دليل
+History = History
+Enter new extension (starting with dot) here = ادخل الامتداد الجديد (ابتداءً بنقطة)
+Class properties = خصائص الفئة
+Add class = إضافة فئة
+Delete class = خذف فئة
+Filter = انتقاء
+Disable filter = تعطيل الانتقاء
+Add menu item = إضافة عنصر قائمة
+Delete item = خذف عنصر
+Row text = Row text
+Select program = اختيار برنامج
+Command = أمر
+Remove icon = حذف ايقونة
+Select icon file = اختيار ملف الايقونة
+Icon file = ملف الايقونة
+Hidden = اخفاء
+Special = خاص
+All types = جميع الانواع
+Unknown = غير معروف
+Folder = مجلد
+Rules = قوانين
+Enable content rules = تفعيل قوانين المحتوى
+Starts with: = يبدأ بـ:
+Contains: = يحتوي:
+Add rule = إضافة قانون
+Delete rule = حذف قانون
+Rule name = اسم القانون
+Matching method = طريقة المطابقة
+Text to find = نص البحث
+
+[Setup]
+
+Types setup = تنصيب Types
+Install = تنصيب
+Cancel = الغاء
+Add to Control Panel = اضافة الى لوحة التحكم
+Start menu shortcut = اختصار لقائمة ابدأ
+Desktop shortcut = اختصار لسطح المكتب
+Abort = نبذة
+Close = اغلاق
+Types = انواع Types
+Where to put program files? = أين تود تنصيب البرنامج؟
+Aborted by user = إحباط بواسطة المستخدم
+Done = تم
+Fail = فشل
+Already exists, backing up = موجود مسبقاً, نسخة اختياطية
+Creating program folder = انشاء مجلد البرنامج
+Already exists = موجود مسبقاً
+Cannot create directory = لا يمكن انشاء مجلد
+Extracting main executable = اضافة التنفيذ الرئيس
+Extracting association proxy = اضافة الارتباط Proxy
+Cannot copy = لا يمكن نسخ
+Applying settings = تطبيق الاعدادات
+Failed to modify registry = فشل في تعديل سجل الويندوز
+Extracting control panel applet = اضافة بريمج لوحة التحكم
+Registering control panel applet = تسجيل بريمج لوحة التحكم
+Error registering control panel applet = خلل في تسجيل بريمج لوحة التحكم
+Creating desktop shortcut = انشاء اختصار سطح المكتب
+Cannot add desktop shortcut = لا يمكن اضافة اختصار سطح المكتب
+Creating Start menu shortcut = انشاء اختصار قائمة إبدأ
+Cannot add Start menu shortcut = لا يمكن اضافة اختصار قائمة إبدأ
+Extracting uninstaller = استخراج ملغي التثبيت
+Registering uninstaller = تسجيل ملغي التثبيت
+Failed to add uninstall entry = فشل في اضافة مدخلة ملغي التثبيت
+Removing backup files = حذف ملفات الاحتياط
+Installation completed = تم التثبيت
+Rolling back = اعادة الدورة
+Removing main executable = حذف التنفيذ الرئيس
+Removing association proxy = إزالة الارتباط Proxy
+Removing uninstaller = إزالة إلغاء التثبيت
+Removing control panel applet = ازالة بريمج لوحة التحكم
+Restoring backup files = استعادة ملفات الاحتياط
+Removing directory = حذف المجلد
+Removing desktop shortcut = حذف احتصار سطح المكتب
+Removing Start menu shortcut = حذف اختصار قائمة ابدأ
+Installation aborted = احباط التسطيب
+Add to context menus = اضافة الى القوائم
+Adding context menu entry = اضافة مدخلة القائمة
+Cannot add context menu entry = لا يمكن اضافة مدخلة القائمة
+Removing context menu entry = حذف مدخلة القائمة
+Edit file type = تعديل نوع الملف
+Copying language packs = نسخ حزم اللغات
+
+[Remove]
+
+Types removal = حذف برنامج Types
+RemoveTypes? = هل انت متأكد من حذف برنامج Types؟
+CheckNotRunning. = تأكد من ان البرنامج غير مشغل (لا يعمل) حالياً.
+EraseSettings? = حذف جميع اعدادات البرنامج؟
+RemovalDone. = تم حذف البرنامج من نظامك.
+
+[Panel]
+
+PanelDescription = ادارة انواع الملفات

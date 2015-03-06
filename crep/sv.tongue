@@ -1,0 +1,20 @@
+Svenska
+
+{AppName} setup = Installation av {AppName}
+Install = Installera
+Done = Klar
+Replace… = Ersätt …
+Error: {ErrorCode} = Fel: {ErrorCode}
+
+Replace = Ersätt
+Test = Testa
+Done. = Klar.
+Files: = Filer:
+Names: = Namn:
+Errors: = Fel:
+Case-sensitive = Skiftlägeskänslig
+Full words only = Endast hela ord
+Regular expression = Reguljärt uttryck
+Include subfolders = Inkludera undermappar
+Replace in file names = Ersätt i filnamn
+Replace in contents = Ersätt i innehåll

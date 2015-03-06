@@ -1,0 +1,134 @@
+﻿Vietname
+vn
+
+[Main]
+
+Search = Tìm kiếm
+Add = Thêm
+Types = Các kiểu
+Classes = Các lớp
+Extensions = Các mở rộng
+Type = Kiểu
+Use linked class =  Sử dụng lớp liên kết
+Title = Tiêu đề
+Name = Tên
+Properties = Thuộc tính
+Rename = Đổi tên
+Delete = Xóa
+Create = Tạo
+Refresh = Làm mới lại
+Class = Lớp
+Actions = Hành động
+Icon = Biểu tượng
+Default = Mặc định
+Use DDE = Sử dụng DDE
+DDE Message = Thông báo DDE
+Application = Ứng dụng
+Application not running = Ứng dụng không chạy
+Topic = Chủ đề
+Executables = Thực thi được
+Perceived type = Kiểu nhận biết được
+Other = Khác
+Extension visibility = Phần mở rộng có thể thấy
+Follow Explorer settings = Cài đặt theo Explorer
+Always show extension = Luôn hiển thị phần mở rộng
+Never show extension = Không hiển thị phần mở rộng
+About = Giới thiệu
+License = Bản quyền
+Authors = Tác giả
+Manual = Hướng dẫn
+History = Lịch sử
+Enter new extension (starting with dot) here = Nhập vào phần mở rộng mới (bắt đầu bằng dấu chấm)
+Class properties = Thuộc tính lớp
+Add class = Thêm lớp
+Delete class = Xóa lớp
+Filter = Lọc
+Disable filter = Tắt chức năng lọc
+Add menu item = Thêm menu
+Delete item = Xóa menu
+Row text = Dòng ký tự
+Select program = Chọn chương trình
+Command = Lệnh
+Remove icon = Xóa biểu tượng
+Select icon file = Chọn file biểu tượng
+Icon file = file biểu tượng
+Hidden = Ẩn
+Special = Đặc biệt
+All types = Tất cả các kiểu
+Unknown = Không biết
+Folder = Thư mục
+Rules = Các luật
+Enable content rules = Bật các luật nội dung
+Starts with: = Bắt đầu với:
+Contains: = Chứa đựng:
+Add rule = Thêm luật
+Delete rule = Xóa luật
+Rule name = Tên luật
+Matching method = Phương pháp so bằng
+Text to find = Nội dung tìm kiếm
+
+[Setup]
+
+Types setup = Các kiểu cài đặt
+Install = Cài đặt
+Cancel = Hủy
+Add to Control Panel = Thêm vào Control Panel
+Start menu shortcut = Thêm lối tắt trong menu Start
+Desktop shortcut = Tạo lối tắt tại Desktop
+Abort = Hủy
+Close = Đóng
+Types = Các kiểu
+Where to put program files? = Cài các tập tin chương trình tại đâu?
+Aborted by user = Đã hủy bởi người dùng
+Done = Hoàn thành
+Fail = Thất bại
+Already exists, backing up = Đã tồn tại, đang tạo bản lưu
+Creating program folder = Đang tạo thư mục chương trình
+Already exists = Đã tồn tại
+Cannot create directory = Không thể tạo thư mục
+Extracting main executable = Đang giải nén tập tin chương trình
+Extracting association proxy = Đang giải nén proxy thích hợp
+Cannot copy = Không thể sao chép
+Applying settings = Áp dụng các cài đặt
+Failed to modify registry = Cập nhật registry thất bại
+Extracting control panel applet = Đang giải nén vào control panel
+Registering control panel applet = Đang đăng ký vào control panel
+Error registering control panel applet = Lỗi khi đăng ký vào control panel
+Creating desktop shortcut = Đang tạo lối tắt tại desktop
+Cannot add desktop shortcut = Không thể tạo lối tắt tại desktop
+Creating Start menu shortcut = Đang tạo lối tắt tại menu Start
+Cannot add Start menu shortcut = Không thể tạo lối tắt tại menu Start
+Extracting uninstaller = Đang giải nén phần xóa chương trình
+Registering uninstaller = Đang Đăng ký phần xóa chương trình
+Failed to add uninstall entry = Thất bại trong việc đăng ký phần xóa chương trình
+Removing backup files = Đang xóa các tập tin lưu trữ
+Installation completed = Cài đặt đã hoàn thành
+Rolling back = Quay lui
+Removing main executable = Xóa chương trình chính
+Removing association proxy = Xóa proxy tương ứng
+Removing uninstaller = Xóa phần gỡ cài đặt
+Removing control panel applet = Xóa phần control panel
+Restoring backup files = Xóa các tập tin lưu trữ
+Removing directory = Xóa thư mục
+Removing desktop shortcut = Xóa lối tắt tại desktop
+Removing Start menu shortcut = Xóa lối tắt tại menu Start
+Installation aborted = Cài tặt đã bị dừng
+Add to context menus = Thêm vào menu chuột phải
+Adding context menu entry = Đang thêm vào menu chuột phải
+Cannot add context menu entry = Không thể thêm vào menu chuột phải
+Removing context menu entry = Đang xóa phần menu chuột phải
+Edit file type = Soạn thải kiểu tập tin
+Copying language packs = Đang chép phần ngôn ngữ
+
+[Remove]
+
+Types removal = Xóa các kiếu
+RemoveTypes? = Bạn có chắc là sẽ gỡ bỏ các loại?
+CheckNotRunning. = Bạn phải đảm bảo là chương trình không được đang chạy.
+EraseSettings? = Xóa các cài đặt của chương trình?
+RemovalDone. = Các loại đã được xóa ra khỏi hệ thống của bạn.
+
+[Panel]
+
+PanelDescription = Quản lý các kiểu tập tin
+PanelKeywords = extensions;associations;types;classes;icons;context;menu;explorer

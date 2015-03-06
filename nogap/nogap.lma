@@ -1,0 +1,774 @@
+################ MIPS ################
+
+
+
+
+[=
+	NOP $00000000
+	SPECIAL $00 BcondZ $01 J $02 JAL $03 BEQ $04 BNE $05 BLEZ $06 BGTZ $07
+	ADDI $08 ADDIU $09 SLTI $0A SLTIU $0B ANDI $0C ORI $0D XORI $0E LUI $0F
+	COP0 $10 COP1 $11 COP2 $12 COP3 $13
+	LB $20 LH $21 LWL $22 LW $23 LBU $24 LHU $25 LWR $26
+	SB $28 SH $29 SWL $2A SW $2B SWR $2E
+	LWC0 $30 LWC1 $31 LWC2 $32 LWC3 $33
+	SWC0 $38 SWC1 $39 SWC2 $3A SWC3 $3B
+	SLL $00 SRL $02 SRA $03 SLLV $04 SRLV $06 SRAV $07
+	JR $08 JALR $09 SYSCALL $0C BREAK $0D
+	MFHI $10 MTHI $11 MFLO $12 MTLO $13
+	MULT $18 MULTU $19 DIV $1A DIVU $1B 
+	ADD $20 ADDU $21 SUB $22 SUBU $23 AND $24 OR $25 XOR $26 NOR $27
+	SLT $2A SLTU $2B
+	
+	R0$ $00 AT$ $01 V0$ $02 V1$ $03 A0$ $04 A1$ $05 A2$ $06 A3$ $07
+	T0$ $08 T1$ $09 T2$ $0A T3$ $0B T4$ $0C T5$ $0D T6$ $0E T7$ $0F
+	S0$ $10 S1$ $11 S2$ $12 S3$ $13 S4$ $14 S5$ $15 S6$ $16 S7$ $17
+	T8$ $18 T9$ $19 K0$ $1A K1$ $1B GP$ $1C SP$ $1D FP$ $1E RA$ $1F
+]
+
+[= [enc-r f s t d a] [word [|
+	[<< [& s $1F] 21] [<< [& t $1F] 16] [<< [& d $1F] 11]
+	[<< [& a $1F] 6] [<< [& f $3F] 0] ]]]
+
+[= [enc-i o s t i] [word [|
+	[<< [& o $3F] 26] [<< [& s $1F] 21]
+	[<< [& t $1F] 16] [<< [& i $FFFF] 0] ]]]
+
+[= [enc-j o i] [word [|
+	[<< [& o $3F] 26] [<< [& i $3FFFFFF] 0] ]]]
+
+[= [half x] [int [& x $FFFF] 2]]
+[= [word x] [int [& x $FFFFFFFF] 4]]
+
+[= [hi x] [half [>> [int x] 16]]]
+[= [lo x] [half [int x]]]
+
+[= [absa a] [|| [virt a] a]]
+[= [rela a] [>> [- [phys a] [+ [phys [where]] 4]] 2]]
+
+[= [add d$ s$ t$] [enc-r ADD s$ t$ d$ 0]]
+[= [addi t$ s$ i] [enc-i ADDI s$ t$ i]]
+[= [addiu t$ s$ i] [enc-i ADDIU s$ t$ i]]
+[= [sub d$ s$ t$] [enc-r SUB s$ t$ d$ 0]]
+[= [subu d$ s$ t$] [enc-r SUB s$ t$ d$ 0]]
+[= [and d$ s$ t$] [enc-r AND s$ t$ d$ 0]]
+[= [or d$ s$ t$] [enc-r OR s$ t$ d$ 0]]
+[= [xor d$ s$ t$] [enc-r XOR s$ t$ d$ 0]]
+[= [ori t$ s$ i] [enc-i ORI s$ t$ i]]
+[= [nor d$ s$ t$] [enc-r NOR s$ t$ d$ 0]]
+[= [andi t$ s$ i] [enc-i ANDI s$ t$ i]]
+[= [xori t$ s$ i] [enc-i XORI s$ t$ i]]
+[= [sll d$ t$ i] [enc-r SLL 0 t$ d$ i]]
+[= [sra d$ t$ i] [enc-r SRA 0 t$ d$ i]]
+[= [srl d$ t$ i] [enc-r SRL 0 t$ d$ i]]
+[= [beq s$ t$ : i] [delay NOP [enc-i BEQ s$ t$ [rela [eval^ [car i]]]]]]
+[= [bne s$ t$ : i] [delay NOP [enc-i BNE s$ t$ [rela [eval^ [car i]]]]]]
+[= [bgtz s$ t$ : i] [delay NOP [enc-i BGTZ s$ t$ [rela [eval^ [car i]]]]]]
+[= [blez s$ t$ : i] [delay NOP [enc-i BLEZ s$ t$ [rela [eval^ [car i]]]]]]
+[= [j : i] [delay NOP [enc-j J [>> [absa [eval^ [car i]]] 2]]]]
+[= [jal : i] [delay NOP [enc-j JAL [>> [absa [eval^ [car i]]] 2]]]]
+[= [jalr s$] [enc-r JALR s$ 0 RA$ 0]]
+[= [jr s$] [enc-r JR s$ 0 0 0]]
+[= [lb t$ i s$] [enc-i LB s$ t$ i]]
+[= [lbu t$ i s$] [enc-i LBU s$ t$ i]]
+[= [lh t$ i s$] [enc-i LH s$ t$ i]]
+[= [lhu t$ i s$] [enc-i LHU s$ t$ i]]
+[= [lui t$ i] [enc-i LUI 0 t$ i]]
+[= [lw t$ i s$] [enc-i LW s$ t$ i]]
+[= [sb t$ i s$] [enc-i SB s$ t$ i]]
+[= [sh t$ i s$] [enc-i SH s$ t$ i]]
+[= [sw t$ i s$] [enc-i SW s$ t$ i]]
+[= [slt d$ s$ t$] [enc-r SLT s$ t$ d$ 0]]
+[= [sltu d$ s$ t$] [enc-r SLTU s$ t$ d$ 0]]
+[= [slti t$ s$ i] [enc-i SLTI s$ t$ i]]
+[= [sltiu t$ s$ i] [enc-i SLTIU s$ t$ i]]
+[= [mfhi d$] [enc-r MFHI 0 0 d$ 0]]
+[= [mflo d$] [enc-r MFLO 0 0 d$ 0]]
+[= [mult s$ t$] [enc-r MULT s$ t$ 0 0]]
+[= [multu s$ t$] [enc-r MULTU s$ t$ 0 0]]
+[= [div s$ t$] [enc-r DIV s$ t$ 0 0]]
+[= [divu s$ t$] [enc-r DIVU s$ t$ 0 0]]
+
+[= [li t$ i] [if
+	[<= [abs i] $FFFF] [ori t$ R0$ i]
+	else: [do [lui t$ [hi i]] [ori t$ t$ [lo i]]] ]]
+
+[= [beqz t$ : i] [apply^ beq [list t$ R0$ [car i]]]]
+[= [bnez t$ : i] [apply^ bne [list t$ R0$ [car i]]]]
+[= [mov to$ fr$] [add to$ R0$ fr$]]
+[= [not r$] [nor r$ r$ R0$]]
+
+[= [li-sw i off base$] [li AT$ i] [sw AT$ off base$]]
+
+[= [if-block op & co]
+	[op [eval [car [car &]] co] [eval [cadr [car &]] co] next]
+	NOP [evall [cdr &] co] next: [] ]
+
+[= [if-ne : &] [if-block beq & [caller]]]
+[= [if-eq : &] [if-block bne & [caller]]]
+
+[= [if-nez r$ : &do] [apply^ if-ne [cons [list r$ R0$] &do]]]
+[= [if-eqz r$ : &do] [apply^ if-eq [cons [list r$ R0$] &do]]]
+
+[= [save-regs regs]
+	[if regs [addiu SP$ SP$ [lo -[* [len regs] 4]]]]
+	[= i 0] [for reg: regs [sw reg [lo [* i 4]] SP$] [=+ i 1]] ]
+
+[= [pop-regs regs]
+	[= i 0] [for reg: regs [lw reg [lo [* i 4]] SP$] [=+ i 1]]
+	[if regs [addiu SP$ SP$ [lo [* [len regs] 4]]]] ]
+
+[= [name-regs start vs co] [= r start]
+	[for v: vs [let v r co] [=+ r 1]] ]
+
+[= [fn : ...]
+	[= lox [env [caller][caller]]]
+	[name-regs A0$ [car ...] lox]
+	[name-regs S0$ [cadr ...] lox]
+	[= saved [cons RA$ [apply list [cadr ...] lox]]]
+	[save-regs saved]
+	[evall [cddr ...] lox]
+	.: [let .: . lox]
+	[pop-regs saved]
+	[jr RA$] NOP
+]
+
+
+
+
+################ PSX ################
+
+
+
+
+[=
+	RAM $80000000
+	BIOS-RESERVED $10000
+	USER-RAM [+ RAM BIOS-RESERVED]
+	HEADER-SIZE $800
+	
+	IO $1F800000
+	
+	GP0 [+ IO $1810]
+	GP1 [+ IO $1814]
+	
+	I-STAT [+ IO $1070]
+	I-MASK [+ IO $1074]
+]
+
+[=
+	GP0:TEXPAGE $E1
+	GP0:TEXWINDOW $E2
+	GP0:DOT-OPAQUE $68
+	GP0:QUAD-MONO-OPAQUE $28
+	GP0:TRI-TEXTURED $25
+	GP0:TOP-LEFT $E3
+	GP0:BOTTOM-RIGHT $E4
+	GP0:OFFSET $E5
+	GP0:LINE-POLY-MONO-OPAQUE $48
+	GP0:LINE-END $55555555
+	GP1:ENABLE $03
+	GP1:DISPSTART $05
+	GP1:HRANGE $06
+	GP1:VRANGE $07
+	GP1:DISPMODE $08
+]
+
+
+[= [gp c v] [| [<< c 24] [|| v $000000]]]
+[= [xy16 x y] [| [lo x] [<< [lo y] 16]]]
+[= [xy12 x y] [| x [<< y 12]]]
+[= [xy10 x y] [| x [<< y 10]]]
+
+
+[= Bios :[
+	[$A0 $4E gpu_sync []]
+	[$A0 $2F rand []]
+	[$A0 $30 srand [seed]]
+	[$A0 $39 InitHeap [start size]]
+	[$A0 $33 malloc [size]]
+	[$A0 $34 free [ptr]]
+	[$B0 $12 InitPad [buf1 siz1 buf2 siz2]]
+	[$B0 $13 StartPad []]
+	[$C0 $02 SysEnqIntRP [priority struct]]
+]]
+
+[= [call-bios : func]
+	[= b [find-one [λ [i] [== [nth i 2] [car func]]] Bios]]
+	[= blck [nth b 0] fval [nth b 1] argc [len [nth b 3]]]
+	[if argc [addiu SP$ SP$ -[* argc 4]]]
+	[li T0$ blck] [li T1$ fval] [jalr T0$] NOP
+	[if argc [addiu SP$ SP$ [+ 0 [* argc 4]]]] ]
+
+
+[= [EnterCriticalSection] [li A0$ $01] [word SYSCALL]]
+[= [ExitCriticalSection] [li A0$ $02] [word SYSCALL]]
+
+
+[delay []
+	[align $800] :EOF
+	@$000 "PS-X EXE"
+	@$010 PC: Main
+	@$018 RamDst: USER-RAM
+	@$01C ExeSize: [- [phys EOF] HEADER-SIZE]
+	@$030 SPBase: $801FFF00
+]
+
+
+
+
+################ MISC ################
+
+
+
+
+[= struct dic]
+[= [arr- n t] [cons [cons n t] [if [> n 0] [arr- [- n 1] t]]]]
+[= [arr n t] [flip [arr- n t]]]
+
+[= [size-of t]
+	[if [cons? t] [do [s: 0]
+			[for kv: t [=+ s [size-of [cdr kv]]]]
+		s ] :: t ]]
+
+[= [static t defs]
+	start: [times [size-of t] $00] end:
+	[for dd: defs
+		@[offset-of [phys start] t [car dd]]
+		[if [cons? [cdr dd]]
+			[static [t [car dd]] [cdr dd]]
+			else: [cdr dd] ]] @end ]
+
+[= [offset-of o0 t key]
+	[if [== [caar t] key] o0
+		else: [offset-of [+ o0 [size-of [cdar t]]] [cdr t] key] ]]
+
+[= [of t : &] [of& t & [caller]]]
+[= [of& t keys env]
+	[= key [eval [car keys] env]]
+	[if keys [offset-of [of& [t key] [cdr keys] env] t key]
+		else: 0 ]]
+
+
+
+
+################ TEST ################
+
+
+
+
+[
+	ScrW: 320 CX: [lo [/ ScrW 2]]
+	ScrH: 240 CY: [lo [/ ScrH 2]]
+	
+	TvX: $260
+	TvY: $88
+	
+	TexpageX: [* ScrW 2]
+	Texpage: [| %Cctty---- [int [/ TexpageX 64]]]
+	
+	HeapBase: [+ USER-RAM [* 512 1024]]
+	HeapSize: [* 1024 1024]
+	
+	IO$: GP$
+	Gl$: FP$
+	
+	Cloze: $0300
+	Clozest: $0080
+	BackColor: $000000
+	LineColor: $00FF00
+	Near: $0040
+	CellsCount: 5
+	SpawnZ: [- 1 [* CellsCount 2]]
+	Unit: 128
+	TSize: 64
+	
+	Uv: [struct U: 1 V: 1 pad: 2]
+	Xyz: [struct X: 2 Y: 2 Z: 2 pad: 2]
+	Vert: [struct Point: Xyz Texco: Uv Scr: Xyz ]
+	Edge: [struct V0: 4 V1: 4 VC: Vert Sub: 4 Cloze: 2 pad: 2 ]
+	Quad: [struct E: [arr 4 4] VC: Vert Sub: 4 ]
+	ESub: [arr 2 Edge] QSub: [struct Q: [arr 4 Quad] E: [arr 4 Edge]]
+	Cell: [struct Pov: Xyz Q: [arr 1 Quad] V: [arr 4 Vert] E: [arr 4 Edge]]
+]
+
+[= [set-global-regs] [li IO$ IO] [lui Gl$ [hi Globals]]]
+[= [g+ v off] [+ [- [virt v] [virt Globals]] [|| off 0]]]
+
+[= [fix x] [lo [* x Unit]]]
+[= [uv u v] [struct U: [& [* u TSize] $FF] V: [& [* v TSize] $FF]]]
+[= [xyz x y z] [struct X: [fix x] Y: [fix y] Z: [fix z]]]
+[= four [[range 0 4]]]
+
+[= [cell z] c: [c: [virt c]] [struct
+	
+	Pov: [struct Y: $50 Z: z]
+	
+	V: [struct
+		0 [struct Point: [xyz -1 +1 -1] Texco: [uv 0 0]]
+		1 [struct Point: [xyz -1 +1 +1] Texco: [uv 0 1]]
+		2 [struct Point: [xyz +1 +1 +1] Texco: [uv 1 1]]
+		3 [struct Point: [xyz +1 +1 -1] Texco: [uv 1 0]]
+	]
+	
+	E: [struct
+		0 [struct V0: [+ c [of Cell :V 0]] V1: [+ c [of Cell :V 1]] Cloze: Cloze]
+		1 [struct V0: [+ c [of Cell :V 1]] V1: [+ c [of Cell :V 2]] Cloze: Cloze]
+		2 [struct V0: [+ c [of Cell :V 3]] V1: [+ c [of Cell :V 2]] Cloze: Cloze]
+		3 [struct V0: [+ c [of Cell :V 0]] V1: [+ c [of Cell :V 3]] Cloze: Cloze]
+	]
+	
+	Q: [struct 0 [struct E: [struct
+		0 [+ c [of Cell :E 0]] 1 [+ c [of Cell :E 1]]
+		2 [+ c [of Cell :E 2]] 3 [+ c [of Cell :E 3]]
+	]]]
+]]
+
+
+@HEADER-SIZE @@USER-RAM EXE:
+	
+	
+	Globals:
+		
+		DispBufX: $0000
+		DrawBufX: [lo ScrW]
+		
+		Pov: [static Xyz]
+		Cells: [z: SpawnZ] [ times CellsCount
+			[static Cell [cell [fix z]]] [=+ z 2] ]
+		
+		[align 4]
+	
+	
+	MeanVert: [fn [v0$ v1$ vo$] []
+		
+		[lbu T0$ [of Vert :Texco :U] v0$] [lbu T1$ [of Vert :Texco :U] v1$]
+		[lbu T2$ [of Vert :Texco :V] v0$] [lbu T3$ [of Vert :Texco :V] v1$]
+		
+		[add T0$ T0$ T1$] [sra T0$ T0$ 1] [sb T0$ [of Vert :Texco :U] vo$]
+		[add T2$ T2$ T3$] [sra T2$ T2$ 1] [sb T2$ [of Vert :Texco :V] vo$]
+		
+		[lh T0$ [of Vert :Point :X] v0$] [lh T1$ [of Vert :Point :X] v1$]
+		[lh T2$ [of Vert :Point :Y] v0$] [lh T3$ [of Vert :Point :Y] v1$]
+		[lh T4$ [of Vert :Point :Z] v0$] [lh T5$ [of Vert :Point :Z] v1$]
+		
+		[add T0$ T0$ T1$] [sra T0$ T0$ 1] [sh T0$ [of Vert :Point :X] vo$]
+		[add T2$ T2$ T3$] [sra T2$ T2$ 1] [sh T2$ [of Vert :Point :Y] vo$]
+		[add T4$ T4$ T5$] [sra T4$ T4$ 1] [sh T4$ [of Vert :Point :Z] vo$]
+	]
+	
+	
+	MakeEdge: [fn [e$] []
+		
+		[sw R0$ [of Edge :Sub] e$]
+		[addiu A2$ e$ [of Edge :VC]]
+		
+		[lw A1$ [of Edge :V1] e$]
+		[lw A0$ [of Edge :V0] e$]
+		
+		[jal MeanVert] NOP
+	]
+	
+	MakeQuad: [fn [q$] [vc$ v0$ v1$]
+		
+		[sw R0$ [of Quad :Sub] q$]
+		
+		[addiu vc$ q$ [of Quad :VC]]
+		
+		[lw v0$ [of Quad :E 0] q$]
+		[lw v1$ [of Quad :E 2] q$]
+		
+		[lw v0$ [of Edge :V0] v0$]
+		[lw v1$ [of Edge :V1] v1$]
+		
+		[mov A0$ v0$]
+		[mov A1$ v1$]
+		[mov A2$ vc$]
+		
+		[jal MeanVert] NOP
+	]
+	
+	MakeCell: [fn [c$] [lc$]
+		
+		[mov lc$ c$]
+		
+		[for i: four [addiu A0$ lc$ [of Cell :E i]] [jal MakeEdge] NOP]
+		[addiu A0$ lc$ [of Cell :Q 0]] [jal MakeQuad] NOP
+	]
+	
+	
+	SplitEdge: [fn [e$] [le$ sub$]
+		
+		[mov le$ e$]
+		
+		[li A0$ [size-of ESub]]
+		[call-bios malloc]
+		[sw V0$ [of Edge :Sub] le$]
+		
+		[mov sub$ V0$]
+		
+		[lw T0$ [of Edge :V0] le$]
+		[lw T2$ [of Edge :V1] le$]
+		[lh T3$ [of Edge :Cloze] le$]
+		
+		[addiu T1$ le$ [of Edge :VC]]
+		[sra T3$ T3$ 1]
+		
+		[sw T0$ [of ESub 0 :V0] sub$]
+		[sw T1$ [of ESub 0 :V1] sub$]
+		[sw T1$ [of ESub 1 :V0] sub$]
+		[sw T2$ [of ESub 1 :V1] sub$]
+		
+		[sh T3$ [of ESub 0 :Cloze] sub$]
+		[sh T3$ [of ESub 1 :Cloze] sub$]
+		
+		[addiu A0$ sub$ [of ESub 0]] [jal MakeEdge] NOP
+		[addiu A0$ sub$ [of ESub 1]] [jal MakeEdge] NOP
+		
+		[mov V0$ sub$]
+	]
+	
+	SplitQuad: [fn [q$] [l0$ l1$ l2$ l3$ lq$ sub$]
+		
+		[mov lq$ q$] NOP
+		
+		[li A0$ [size-of QSub]]
+		[call-bios malloc]
+		[sw V0$ [of Quad :Sub] lq$]
+		[mov sub$ V0$]
+		
+		[addiu T9$ lq$ [of Quad :VC]]
+		
+		[sw T9$ [of QSub :E 0 :V1] sub$]
+		[sw T9$ [of QSub :E 1 :V0] sub$]
+		[sw T9$ [of QSub :E 2 :V0] sub$]
+		[sw T9$ [of QSub :E 3 :V1] sub$]
+		
+		[for i: four [lw [+ l0$ i] [of Quad :E i] lq$]]
+		
+		[addiu T0$ l0$ [of Edge :VC]] [sw T0$ [of QSub :E 0 :V0] sub$]
+		[addiu T1$ l1$ [of Edge :VC]] [sw T1$ [of QSub :E 1 :V1] sub$]
+		[addiu T2$ l2$ [of Edge :VC]] [sw T2$ [of QSub :E 2 :V1] sub$]
+		[addiu T3$ l3$ [of Edge :VC]] [sw T3$ [of QSub :E 3 :V0] sub$]
+		
+		[for i: four [addiu A0$ sub$ [of QSub :E i]] [jal MakeEdge] NOP]
+		[for i: four [lh [+ T0$ i] [of Edge :Cloze] [+ l0$ i]]]
+		[for i: four [= t [+ T0$ i]] [srl t t 1] [sh t [of QSub :E i :Cloze] sub$]]
+		[for i: four [addiu [+ T0$ i] sub$ [of QSub :E i]]]
+		
+		[sw T0$ [of QSub :Q 0 :E 1] sub$] [sw T0$ [of QSub :Q 1 :E 3] sub$]
+		[sw T1$ [of QSub :Q 1 :E 2] sub$] [sw T1$ [of QSub :Q 2 :E 0] sub$]
+		[sw T2$ [of QSub :Q 2 :E 3] sub$] [sw T2$ [of QSub :Q 3 :E 1] sub$]
+		[sw T3$ [of QSub :Q 0 :E 2] sub$] [sw T3$ [of QSub :Q 3 :E 0] sub$]
+		
+		[for i: four [lw [+ A0$ i] [of Edge :Sub] [+ l0$ i]]]
+		
+		[addiu T0$ A0$ [of ESub 0]] [sw T0$ [of QSub :Q 0 :E 0] sub$]
+		[addiu T1$ A1$ [of ESub 0]] [sw T1$ [of QSub :Q 1 :E 1] sub$]
+		[addiu T2$ A2$ [of ESub 0]] [sw T2$ [of QSub :Q 3 :E 2] sub$]
+		[addiu T3$ A3$ [of ESub 0]] [sw T3$ [of QSub :Q 0 :E 3] sub$]
+		[addiu T0$ A0$ [of ESub 1]] [sw T0$ [of QSub :Q 1 :E 0] sub$]
+		[addiu T1$ A1$ [of ESub 1]] [sw T1$ [of QSub :Q 2 :E 1] sub$]
+		[addiu T2$ A2$ [of ESub 1]] [sw T2$ [of QSub :Q 2 :E 2] sub$]
+		[addiu T3$ A3$ [of ESub 1]] [sw T3$ [of QSub :Q 3 :E 3] sub$]
+		
+		[for i: four [addiu A0$ sub$ [of QSub :Q i]] [jal MakeQuad] NOP]
+		
+		[mov V0$ sub$]
+	]
+	
+	
+	ClearEdge: [fn [e$] [le$ sub$]
+		
+		[lw sub$ [of Edge :Sub] e$]
+		[mov le$ e$]
+		
+		[if-ne [sub$ R0$]
+			
+			[addiu A0$ sub$ [of ESub 0]] [jal ClearEdge] NOP
+			[addiu A0$ sub$ [of ESub 1]] [jal ClearEdge] NOP
+			
+			[mov A0$ sub$]
+			[call-bios free]
+			
+			[sw R0$ [of Edge :Sub] le$]
+		]
+	]
+	
+	ClearQuad: [fn [q$] [lq$ sub$]
+		
+		[lw sub$ [of Quad :Sub] q$]
+		[mov lq$ q$]
+		
+		[if-ne [sub$ R0$]
+			
+			[for i: four [addiu A0$ sub$ [of QSub :E i]] [jal ClearEdge] NOP]
+			[for i: four [addiu A0$ sub$ [of QSub :Q i]] [jal ClearQuad] NOP]
+			
+			[mov A0$ sub$]
+			[call-bios free]
+			
+			[sw R0$ [of Quad :Sub] lq$]
+		]
+	]
+	
+	
+	DrawTri: [fn [v0$ v1$ v2$] [l0$ l1$ l2$ l3$ l4$ l5$]
+		
+		[lh T0$ [of Vert :Scr :Z] v0$] NOP [slti T0$ T0$ Near] [if-nez T0$ [j .] NOP]
+		[lh T0$ [of Vert :Scr :Z] v1$] NOP [slti T0$ T0$ Near] [if-nez T0$ [j .] NOP]
+		[lh T0$ [of Vert :Scr :Z] v2$] NOP [slti T0$ T0$ Near] [if-nez T0$ [j .] NOP]
+		
+		[lw l0$ [of Vert :Scr] v0$] [lhu l3$ [of Vert :Texco] v0$]
+		[lw l1$ [of Vert :Scr] v1$] [lhu l4$ [of Vert :Texco] v1$]
+		[lw l2$ [of Vert :Scr] v2$] [lhu l5$ [of Vert :Texco] v2$]
+		
+		[call-bios gpu_sync]
+		
+		[li-sw [gp GP0:TRI-TEXTURED] GP0 IO$]
+		[li T0$ [<< Texpage 16]] [or l4$ l4$ T0$]
+		
+		[sw l0$ GP0 IO$] [sw l3$ GP0 IO$]
+		[sw l1$ GP0 IO$] [sw l4$ GP0 IO$]
+		[sw l2$ GP0 IO$] [sw l5$ GP0 IO$]
+		
+		[not l0$ l0$] [not l1$ l1$] [not l2$ l2$]
+		[li-sw [gp GP0:LINE-POLY-MONO-OPAQUE LineColor] GP0 IO$]
+		[sw l0$ GP0 IO$] [sw l1$ GP0 IO$] [sw l2$ GP0 IO$] [sw l0$ GP0 IO$]
+		[li-sw GP0:LINE-END GP0 IO$]
+	]
+	
+	RenderVert: [fn [v$] []
+		
+		[lh T2$ [of Vert :Point :Z] v$]
+		[lh T5$ [g+ Pov [of Xyz :Z]] Gl$] NOP
+		
+		[sub T2$ T2$ T5$] [slti T8$ T2$ Near]
+		[bnez T8$ .] [sh T2$ [of Vert :Scr :Z] v$]
+		
+		[lh T0$ [of Vert :Point :X] v$]
+		[lh T1$ [of Vert :Point :Y] v$]
+		
+		[lh T3$ [g+ Pov [of Xyz :X]] Gl$]
+		[lh T4$ [g+ Pov [of Xyz :Y]] Gl$]
+		
+		[sub T0$ T0$ T3$] [sll T0$ T0$ 8]
+		[sub T1$ T1$ T4$] [sll T1$ T1$ 8]
+		
+		[div T0$ T2$] [mflo T0$] [sh T0$ [of Vert :Scr :X] v$]
+		[div T1$ T2$] [mflo T1$] [sh T1$ [of Vert :Scr :Y] v$]
+	]
+	
+	RenderEdge: [fn [e$] [le$ l2$ l3$ l4$ esub$]
+		
+		[mov le$ e$]
+		[addiu A0$ le$ [of Edge :VC]]
+		[jal RenderVert] NOP
+		
+		[lh l2$ [of Edge :Cloze] le$]
+		[lh l3$ [of Edge :VC :Scr :Z] le$]
+		
+		[slti T0$ l2$ Clozest]
+		[xori T0$ T0$ 1]
+		[slt l4$ l3$ l2$]
+		[and l4$ l4$ T0$]
+		
+		[if-nez l4$
+			
+			[lw esub$ [of Edge :Sub] le$] NOP
+			[if-eqz esub$ [mov A0$ le$] [jal SplitEdge] NOP [mov esub$ V0$]]
+			
+			[addiu A0$ esub$ [of ESub 0]] [jal RenderEdge] NOP
+			[addiu A0$ esub$ [of ESub 1]] [jal RenderEdge] NOP
+			
+			[j .] NOP
+		]
+		
+		[mov A0$ le$]
+		[jal ClearEdge] NOP
+	]
+	
+	RenderSegment: [fn [vc$ e$] [lvc$ lsub$]
+		
+		[lw lsub$ [of Edge :Sub] e$]
+		[mov lvc$ vc$]
+		
+		[if-nez lsub$
+			
+			[mov A0$ lvc$] [addiu A1$ lsub$ [of ESub 0]] [jal RenderSegment] NOP
+			[mov A0$ lvc$] [addiu A1$ lsub$ [of ESub 1]] [jal RenderSegment] NOP
+			
+			[j .] NOP
+		]
+		
+		[lw A2$ [of Edge :V1] A1$]
+		[lw A1$ [of Edge :V0] A1$]
+		
+		[jal DrawTri] NOP
+	]
+	
+	RenderQuad: [fn [q$] [l0$ l1$ l2$ l3$ l4$ lq$]
+		
+		[mov lq$ q$]
+		
+		[for i: four [lw [+ l0$ i] [of Quad :E i] lq$]]
+		
+		[addiu l4$ lq$ [of Quad :VC]]
+		[mov A0$ l4$] [jal RenderVert] NOP
+		
+		[for i: four [lw [+ T0$ i] [of Edge :Sub] [+ l0$ i]] NOP [beqz [+ T0$ i] final] NOP]
+		
+		[lw l2$ [of Quad :Sub] lq$] NOP
+		[if-eqz l2$ [mov A0$ lq$] [jal SplitQuad] NOP [mov l2$ V0$]]
+		
+		[for i: four [addiu A0$ l2$ [of QSub :E i]] [jal RenderEdge] NOP]
+		[for i: four [addiu A0$ l2$ [of QSub :Q i]] [jal RenderQuad] NOP]
+		
+		[j .] NOP final:
+		
+		[mov A0$ lq$] [jal ClearQuad] NOP
+		
+		[for i: four [mov A0$ l4$] [mov A1$ [+ l0$ i]] [jal RenderSegment] NOP]
+	]
+	
+	RenderCell: [fn [c$] [lc$]
+		
+		[lh T0$ [of Cell :Pov :X] c$]
+		[lh T1$ [of Cell :Pov :Y] c$]
+		[lh T2$ [of Cell :Pov :Z] c$]
+		
+		[mov lc$ c$]
+		
+		[addi T2$ T2$ 1]
+		[slti T3$ T2$ [fix 1]]
+		[if-eq [T3$ R0$] [li T2$ [fix SpawnZ]]]
+		[sh T2$ [of Cell :Pov :Z] c$]
+		
+		[sh T0$ [g+ Pov [of Xyz :X]] Gl$]
+		[sh T1$ [g+ Pov [of Xyz :Y]] Gl$]
+		[sh T2$ [g+ Pov [of Xyz :Z]] Gl$]
+		
+		[for i: four [addiu A0$ lc$ [of Cell :V i]] [jal RenderVert] NOP]
+		[for i: four [addiu A0$ lc$ [of Cell :E i]] [jal RenderEdge] NOP]
+		[addiu A0$ lc$ [of Cell :Q 0]] [jal RenderQuad] NOP
+	]
+	
+	Render: [fn [] []
+		
+		[c: [virt Cells]] [ times CellsCount
+			[li A0$ c] [jal RenderCell] NOP
+			[=+ c [size-of Cell]] ]
+	]
+	
+	
+	Swap: [fn [] [disp-x$ draw-x$ off$ o$]
+		
+		[call-bios gpu_sync]
+		
+		[lhu draw-x$ [g+ DrawBufX] Gl$]
+		[lhu disp-x$ [g+ DispBufX] Gl$]
+		
+		[addiu off$ draw-x$ CX]
+		
+		[li o$ [gp GP1:DISPSTART]] [or o$ o$ disp-x$] [sw o$ GP1 IO$]
+		[li o$ [gp GP0:OFFSET [<< CY 11]]] [or o$ o$ off$] [sw o$ GP0 IO$]
+		[li o$ [gp GP0:TOP-LEFT]] [or o$ o$ draw-x$] [sw o$ GP0 IO$]
+		
+		[li o$ [gp GP0:BOTTOM-RIGHT [<< [- ScrH 1] 10]]]
+		[or o$ o$ draw-x$]
+		[addiu o$ o$ [- ScrW 1]]
+		[sw o$ GP0 IO$]
+		
+		[sh draw-x$ [g+ DispBufX] Gl$]
+		[sh disp-x$ [g+ DrawBufX] Gl$]
+	]
+	
+	Clear: [fn [] []
+		
+		[call-bios gpu_sync]
+		
+		[li-sw [gp GP0:QUAD-MONO-OPAQUE BackColor] GP0 IO$]
+		[li-sw [xy16 -CX -CY] GP0 IO$]
+		[li-sw [xy16 +CX -CY] GP0 IO$]
+		[li-sw [xy16 -CX +CY] GP0 IO$]
+		[li-sw [xy16 +CX +CY] GP0 IO$]
+	]
+	
+	
+	OnVBlank: [fn [] []
+		
+		[set-global-regs]
+		
+		[jal Swap] NOP
+		[jal Clear] NOP
+		[jal Render] NOP
+	]
+	
+	VBlankStruct:
+		$00000000 $00000000
+		OnVBlank $00000000
+	
+	
+	Main:
+		
+		InitStuff:
+			
+			[set-global-regs]
+			[li A0$ HeapBase] [li A1$ HeapSize]
+			[call-bios InitHeap]
+		
+		InitGPU:
+			
+			[ts2: [int [log2 TSize]]]
+			[tma: [<< 1 [- ts2 3]]]
+			
+			[sw R0$ GP1 IO$]
+			
+			[li-sw [gp GP1:DISPMODE %rhidmvhH] GP1 IO$]
+			[li-sw [gp GP0:TEXPAGE %yxdADCcttyXxXx] GP0 IO$]
+			[li-sw [gp GP0:TEXWINDOW [| [<< tma 5] tma]] GP0 IO$]
+			[li-sw [gp GP1:HRANGE (xy12 TvX [+ TvX [* ScrW 8]])] GP1 IO$]
+			[li-sw [gp GP1:VRANGE (xy10 [- TvY CY] [+ TvY CY])] GP1 IO$]
+			[li-sw [gp GP1:ENABLE] GP1 IO$]
+		
+		GenTestTexture:
+			
+			[= size TSize size$ S0$]
+			[li size$ size]
+			
+			[= x$ S1$ x0 [* ScrW 2] x1 [+ x0 size]]
+			[= y$ S2$ y0 0 y1 [+ y0 size]]
+			
+			[call-bios gpu_sync]
+			
+			[li-sw [gp GP0:OFFSET [xy10 x0 y0]] GP0 IO$]
+			[li-sw [gp GP0:TOP-LEFT [xy10 x0 y0]] GP0 IO$]
+			[li-sw [gp GP0:BOTTOM-RIGHT [xy10 x1 y1]] GP0 IO$]
+			
+			[mov y$ R0$] loop-y:
+				[mov x$ R0$] loop-x:
+						[call-bios gpu_sync]
+						[call-bios rand] [sll V0$ V0$ 8]
+						[li T0$ [gp GP0:DOT-OPAQUE]] [or T0$ T0$ V0$] [sw T0$ GP0 IO$]
+						[sll T0$ y$ 16] [or T0$ T0$ x$] [sw T0$ GP0 IO$]
+					[addi x$ x$ 1]
+					[bne x$ size$ loop-x] NOP
+				[addi y$ y$ 1]
+				[bne y$ size$ loop-y] NOP
+		
+		MakeRoot:
+			
+			[c: [virt Cells]] [ times CellsCount
+				[li A0$ c] [jal MakeCell] NOP
+				[=+ c [size-of Cell]] ]
+		
+		InstallVblank:
+			
+			[EnterCriticalSection]
+			[mov A0$ R0$] [li A1$ [virt VBlankStruct]]
+			[call-bios SysEnqIntRP]
+			[li-sw 1 I-MASK IO$] NOP
+			[ExitCriticalSection]
+		
+		Forever:
+			
+			[j Forever] NOP

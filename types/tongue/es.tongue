@@ -1,0 +1,132 @@
+﻿Español
+
+[Main]
+
+Search = Buscar
+Add = Añadir
+Types = Tipos (Cambia el Icono Asociado)
+Classes = Clases
+Extensions = Extensión
+Type = Tipo
+Use linked class = Usar Link de la Clase
+Title = Titulo
+Name = Nombre
+Properties = Propiedades
+Rename = Renombrar
+Delete = Borrar
+Create = Crear
+Refresh = Refrescar
+Class = Clase
+Actions = Acciones
+Icon = Icono
+Default = Por Defecto
+Use DDE = Usa DDE
+DDE Message = Mensaje DDE
+Application = Programa
+Application not running = El Programa no esta corriendo
+Topic = Tema
+Executables = Ejecutables 
+Perceived type = Tipo de percepción
+Other = Otro
+Extension visibility = Visibilidad de la Extensión
+Follow Explorer settings = Seguir los ajustes de Explorer
+Always show extension = Mostrar siempre la extensión 
+Never show extension = No mostrar nunca la extensión
+About = Acerca de
+License = Licencia
+Authors = Autores
+Manual = Manual
+History = Historico
+Enter new extension (starting with dot) here = Escriba la nueva Extensión empezando con punto
+Class properties = Propiedades de Clase
+Add class = Añadir Clase
+Delete class = Borrar Clase
+Filter = Filtro
+Disable filter = Sacar Filtro
+Add menu item = Añadir elemento al Menu
+Delete item = Borrar elemento
+Row text = Linea de Texto
+Select program = Seleccionar programa
+Command = Comando
+Remove icon = Sacar Icono
+Select icon file = Seleccionar fichero del icono
+Icon file = Fichero del icono
+Hidden = Ocultar
+Special = Especial
+All types = Todos los tipos
+Unknown = Desconocido
+Folder = Carpeta
+Rules = Reglas
+Enable content rules = Habilitar reglas de contenido
+Starts with: = Empieza con:
+Contains: = Contiene
+Add rule = Añadir regla
+Delete rule = Borra regla
+Rule name = Nombre de la regla
+Matching method = Método de coincidencia
+Text to find = Encontrar texto
+
+[Setup]
+
+Types setup = Ajustes de Types (Cambia el Icono Asociado)
+Install = Instalar
+Cancel = Cancelar
+Add to Control Panel = Añadir al Panel de Control 
+Start menu shortcut = Añadir al menu de inicio
+Desktop shortcut = Acceso directo en el escritorio
+Abort = Abortar
+Close = Cerrar
+Types = Tipos (Cambia el Icono Asociado)
+Where to put program files? = Donde instalar el programa
+Aborted by user = Abortado por el Usuario
+Done = Realizado
+Fail = Fallo
+Already exists, backing up = Ya existe, copia de seguridad
+Creating program folder = Creando carpeta del programa
+Already exists = Ya existe
+Cannot create directory = No se puede crear el directorio
+Extracting main executable = Extrayendo ejecutable
+Extracting association proxy = Extrayendo proxy de asociación
+Cannot copy = No se puede copiar
+Applying settings = Aplicando ajustes
+Failed to modify registry = Fallola modificación en el Registro
+Extracting control panel applet = Extracción enel Panel de Control
+Registering control panel applet = Registrando Aplicación en el Panel de Control
+Error registering control panel applet = Error registrando en el Panel de Control
+Creating desktop shortcut = Creando acceso directo en el escritorio
+Cannot add desktop shortcut = No se puede añadir Acceso directo en el escritorio
+Creating Start menu shortcut = Creando acceso directo en el escritorio
+Cannot add Start menu shortcut = No puede añadirse al Menu
+Extracting uninstaller = Extrayendo desinstalador
+Registering uninstaller = Registrando desinstalador
+Failed to add uninstall entry = Error al añadir entrada del Desinstalador en el Registro
+Removing backup files = Borrando copia de seguridad
+Installation completed = Instalación completa
+Rolling back = Deshaciendo
+Removing main executable = Quitando ejecutable
+Removing association proxy = Quitando proxy de asociación
+Removing uninstaller = Quitando desinstalador
+Removing control panel applet = Quitando aplicación del Panel de Control
+Restoring backup files = Restaurando copia de seguridad
+Removing directory = Quitando direstorio
+Removing desktop shortcut = Quitando acceso directo del escritorio
+Removing Start menu shortcut = Quitando acceso directo al Menu de inicio
+Installation aborted = Instalación abortada
+Add to context menus = Añadir al Menu de Contexto
+Adding context menu entry = Añadiendo entrada al Menu de Contexto
+Cannot add context menu entry = No se puede añadir entrada en el Menu de Contexto
+Removing context menu entry = Quitando entrada en el Menu de Contexto 
+Edit file type = Editar tipo de fichero
+Copying language packs = Copiando fichero de Idioma
+
+[Remove]
+
+Types removal = Eliminación de Tipos
+RemoveTypes? = Está seguro de eliminar Typos (Cambiar icono asociado)?
+CheckNotRunning. = Asegurese de que el programa no este ejecutandose.
+EraseSettings? = Borrar todos los ajustes del programa?
+RemovalDone. = Tipos será eliminado de su sistema.
+
+[Panel]
+Special types = Tipos especiales
+PanelDescription = Administrar Tipos de Archivos

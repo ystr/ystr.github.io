@@ -1,0 +1,132 @@
+﻿Català
+
+[Main]
+
+Search = Buscar
+Add = Afegir
+Types = Tipos (Canvia la Icona Associada)
+Classes = Classes
+Extensions = Extensió
+Type = Tipus
+Use linked class = Usar Link de la Classe
+Title = Títol
+Name = Nom
+Properties = Propietats
+Rename = Canviar nom
+Delete = Borrar
+Create = Crear
+Refresh = Refrescar
+Class = Classe
+Actions = Accions
+Icon = Icona
+Default = Per Defecte
+Use DDE = Usa DDE
+DDE Message = Missatge DDE
+Application = Programa
+Application not running = El Programa no s'està executant
+Topic = Tema
+Executables = Executables 
+Perceived type = Tipus de percepció
+Other = Altre
+Extension visibility = Visibilitat de l'Extensió
+Follow Explorer settings = Ajustaments com l'Explorer
+Always show extension = Mostrar sempre l'extensió
+Never show extension = No mostrar mai l'extensió
+About = Quant a
+License = Llicència
+Authors = Autors
+Manual = Manual
+History = Històric
+Enter new extension (starting with dot) here = Escriu la nova Extensió començant amb punt
+Class properties = Propietats de Classe
+Add class = Afegir Classe
+Delete class = Borrar Classe
+Filter = Filtre
+Disable filter = Eliminar Filtre
+Add menu item = Afegir element al Menú
+Delete item = Borrar element
+Row text = Línia de Text
+Select program = Seleccionar programa
+Command = Comandament
+Remove icon = Eliminar Icona
+Select icon file = Seleccionar arxiu de la icona
+Icon file = Arxiu de la icona
+Hidden = Amagar
+Special = Especial
+All types = Tots els tipus
+Unknown = Desconegut
+Folder = Carpeta
+Rules = Regles
+Enable content rules = Habilitar regles de contingut
+Starts with: = Comença amb:
+Contains: = Conté
+Add rule = Afegir regla
+Delete rule = Borra regla
+Rule name = Nom de la regla
+Matching method = Mètodo de coincidència
+Text to find = Trobar text
+
+[Setup]
+
+Types setup = Ajustaments de Types (Canvia la Icona Associada)
+Install = Instaŀlar
+Cancel = Cancelar
+Add to Control Panel = Afegir al Tauler de Control 
+Start menu shortcut = Afegir al menú d'inici
+Desktop shortcut = Accés directo en el escritorio
+Abort = Canceŀlar
+Close = Tancar
+Types = Tipus (Canvia la Icona Associada)
+Where to put program files? = On instaŀlar el programa
+Aborted by user = Canceŀlat per l'Usuari
+Done = Fet
+Fail = Errada
+Already exists, backing up = Ja existeix, còpia de seguretat
+Creating program folder = Creant carpeta del programa
+Already exists = Ja existeix
+Cannot create directory = No es pot crear el directori
+Extracting main executable = Extraient executable
+Extracting association proxy = Extraient proxy d'associació
+Cannot copy = No es pot copiar
+Applying settings = Aplicant ajustaments
+Failed to modify registry = Error en la modificació del Registre
+Extracting control panel applet = Extracció en el Tauler de Control
+Registering control panel applet = Registrant Aplicació en el Tauler de Control
+Error registering control panel applet = Error registrant en el Tauler de Control
+Creating desktop shortcut = Creant accés directe a l'escriptori
+Cannot add desktop shortcut = No es pot afegir Accés directe a l'escriptori
+Creating Start menu shortcut = Creant accés directe al Menú d'inici
+Cannot add Start menu shortcut = No es pot afegir al Menú
+Extracting uninstaller = Extraient desinstaŀlador
+Registering uninstaller = Registrant desinstaŀlador
+Failed to add uninstall entry = Error afegint entrada del Desinstaŀlador al Registre
+Removing backup files = Borrant còpia de seguretat
+Installation completed = Instaŀlació completa
+Rolling back = Desfent
+Removing main executable = Eliminant ejecutable
+Removing association proxy = Eliminant proxy d'associació
+Removing uninstaller = Eliminant desinstaŀlador
+Removing control panel applet = Eliminant aplicació del Tauler de Control
+Restoring backup files = Restaurant còpia de seguretat
+Removing directory = Eliminant directori
+Removing desktop shortcut = Eliminant accés directe de l'escriptori
+Removing Start menu shortcut = Eliminant accés directe del Menú d'inici
+Installation aborted = Instalació canceŀlada
+Add to context menus = Afegir al Menú de Context
+Adding context menu entry = Afegint entrada al Menú de Context
+Cannot add context menu entry = No es pot afegir entrada al Menú de Context
+Removing context menu entry = Eliminant entrada del Menú de Context
+Edit file type = Editar tipus d'arxiu
+Copying language packs = Copiant arxiu d'Idioma
+
+[Remove]
+
+Types removal = Eliminació de Tipus
+RemoveTypes? = Està segur d'eliminar Typos (Canviar icona associada)?
+CheckNotRunning. = Assegura't que el programa no s'estigui executant.
+EraseSettings? = Borrar tots els ajustaments del programa?
+RemovalDone. = Tipos serà eliminat del teu sistema.
+
+[Panel]
+Special types = Tipus especials
+PanelDescription = Administrar Tipus d'Arxius

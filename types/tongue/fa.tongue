@@ -1,0 +1,134 @@
+فارسی
+
+
+[Main]
+
+Search = جستجو
+Add = جدید
+
+Types = الگو ها
+Classes = دسته ها
+Extensions = پسوند ها
+Type = الگو
+Use linked class = استفاده از دسته
+Title = عنوان
+Name = نام
+Properties = جزئیات
+Rename = نامگذاری
+Delete = حذف
+Create = ایجاد
+Refresh = بروز رسانی
+Class = دسته
+Actions = گزینه ها
+Icon = تصویر
+Default = پیش فرض
+Use DDE = استفاده از DDE
+DDE Message = پیام DDE
+Application = برنامه
+Application not running = برنامه در حال اجرا نیست
+Topic = موضوع
+Executables = فایل های اجرایی
+Perceived type = الگوی قابل مشاهده
+Other = سایر امکانات
+Extension visibility = امکان مشاهده پسوند
+Follow Explorer settings = پیروی از تنظیمات اکسپلورر
+Always show extension = پسوند همواره نمایش داده شود
+Never show extension = پسوند هرگز نمایش داده نشود
+About = درباره برنامه
+License = لیسانس
+Authors = نویسندگان
+Manual = دستورالعمل
+History = تاریخچه
+Enter new extension (starting with dot) here = پسوند جدید (بعلاوه نقطه) را اینجا وارد کنید
+Class properties = خصوصیات دسته
+Add class = ایجاد دسته
+Delete class = حذف دسته
+Filter = محدودیت
+Disable filter = رفع محدودیت
+Add menu item = ایجاد گزینه منوی جدید
+Delete item = حذف گزینه
+Row text = متن ردیف
+Select program = انتخاب برنامه
+Command = دستور
+Remove icon = حذف تصویر
+Select icon file = انتخاب فایل تصویر
+Icon file = فایل تصویر
+Hidden = مخفی
+Special = خاص
+All types = تمامی الگو ها
+Unknown = ناشناخته
+Folder = پوشه
+Rules = قوانین
+Enable content rules = قوانین محتوا فعال باشد
+Starts with: = ابتدای متن:
+Contains: = شامل:
+Add rule = قانون جدید
+Delete rule = حذف قانون
+Rule name = نام قانون
+Matching method = روش مطابقت
+Text to find = متن مورد جستجو
+
+[Setup]
+
+Types setup = نصب برنامه الگو ها
+Install = نصب
+Cancel = لغو
+Add to Control Panel = افزودن به صفحه کنترل
+Start menu shortcut = میانبر در منوی شروع
+Desktop shortcut = میانبر روی دسکتاپ
+Abort = لغو
+Close = خروج
+Types = الگو ها
+Where to put program files? = فایل های برنامه کجا قرار بگیرند؟
+Aborted by user = توسط کاربر لغو شد
+Done = انجام شد
+Fail = شکست خورد
+Already exists, backing up = از قبل موجود است، در حال تهیه پشتیبان
+Creating program folder = در حال ایجاد پوشه برنامه
+Already exists = از قبل موجود است
+Cannot create directory = امکان ایجاد پوشه وجود ندارد
+Extracting main executable = استخراج فایل اجرایی اصلی
+Extracting association proxy = استخراج پروکسی وابستگی
+Cannot copy = امکان نسخه برداری وجود ندارد
+Applying settings = در حال اعمال تنظیمات
+Failed to modify registry = اصلاح رجیستری شکست خورد
+Extracting control panel applet = در حال استخراج اپلت صفحه کنترل
+Registering control panel applet = در حال ثبت اپلت صفحه کنترل
+Error registering control panel applet = ثبت اپلت صفحه کنترل با خطا مواجه شد
+Creating desktop shortcut = در حال ایجاد میانبر روی دسکتاپ
+Cannot add desktop shortcut = امکان ایجاد میانبر روی دسکتاپ وجود ندارد
+Creating Start menu shortcut = در حال ایجاد میانبر منوی شروع
+Cannot add Start menu shortcut = امکان ایجاد میانبر منوی شروع وجود ندارد
+Extracting uninstaller = در حال استخراج برنامه تخریب
+Registering uninstaller = در حال ثبت برنامه تخریب
+Failed to add uninstall entry = ایجاد گزینه تخریب شکست خورد
+Removing backup files = در حال دور ریختن فایل های پشتیبان
+Installation completed = نصب با موفقیت انجام شد
+Rolling back = در حال بازگرداندن تغییرات
+Removing main executable = در حال دور ریختن فایل اجرایی اصلی
+Removing association proxy = در حال دور ریختن پروکسی وابستگی
+Removing uninstaller = در حال دور ریختن برنامه تخریب
+Removing control panel applet = در حال دور ریختن اپلت صفحه کنترل
+Restoring backup files = در حال ترمیم از طریق فایل های پشتیبان
+Removing directory = در حال دور ریختن پوشه
+Removing desktop shortcut = در حال دور ریختن میانبر دسکتاپ
+Removing Start menu shortcut = در حال دور ریختن میانبر منوی شروع
+Installation aborted = نصب برنامه لغو شد
+Add to context menus = به منوی فایل ها افزوده شود
+Adding context menu entry = در حال ایجاد گزینه در منوی فایل ها
+Cannot add context menu entry = امکان ایجاد گزینه در منوی فایل ها وجود ندارد
+Removing context menu entry = در حال حذف گزینه از منوی فایل ها
+Edit file type = اصلاح الگوی فایل
+Copying language packs = در حال نسخه برداری از بسته های ترجمه
+
+[Remove]
+
+Types removal = دور ریختن برنامه الگو ها
+RemoveTypes? = آیا میخواهید برنامه الگو ها را دور بریزد؟
+CheckNotRunning. = لطفا مطمئن شوید که برنامه در حال اجرا نیست.
+EraseSettings? = آیا تمامی تنظیمات برنامه دور ریخته شوند؟
+RemovalDone. = برنامه الگو ها از دستگاه شما حذف شد.
+
+[Panel]
+
+PanelDescription = مدیریت الگوی فایل ها

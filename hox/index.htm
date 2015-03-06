@@ -1,0 +1,39 @@
+<pre>
+HOX
+	
+	A simple hot corner launcher for X11.
+
+
+REQUIREMENTS
+	
+	X11/Xlib.h
+
+
+DOWNLOAD
+	
+	<a href='hox.c'>hox.c</a> (1 KB)
+
+
+MAKE AND INSTALL
+	
+	gcc hox.c -lm -lX11 -s -Os
+	sudo cp hox.o /usr/local/bin/hox
+
+
+SYNTAX
+	
+	hox
+		-tl TopLeftCommand
+		-tr TopRightCommand
+		-bl BottomLeftCommand
+		-br BottomRightCommand
+	
+	NOTE! You must put & at the end of your command
+	if you want hox to remain active while it's running.
+	Also, quote parameters that contain spaces.
+
+
+EXAMPLE
+	
+	hox -tl skippy-xd -tr "x-terminal-emulator &"
+</pre>

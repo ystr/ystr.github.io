@@ -1,0 +1,90 @@
+﻿Deutsch
+
+[Main]
+
+Search = Suchen
+Add = Hinzufügen
+Types = Types
+Classes = Klassen
+Extensions = Erweiterungen
+Type = Typ
+Use linked class = Verknüpfung mit Klasse
+Title = Titel
+Name = Name
+Properties = Eigenschaften
+Rename = Umbenennen
+Delete = Löschen
+Create = Erstellen
+Refresh = Aktualisieren
+Class = Klasse
+Actions = Aktionen
+Icon = Symbol
+Default = Standard
+Use DDE = DDE verwenden
+DDE Message = DDE-Nachricht
+Application = Anwendung
+Application not running = DDE-Anwendung nicht aktiv
+Topic = Thema
+Executables = Programme
+Perceived type = Dateityp-Erkennung
+Other = Erweitert
+Extension visibility = Sichtbarkeit der Erweiterung
+Follow Explorer settings = Wie im Explorer angegeben
+Always show extension = Erweiterung immer anzeigen
+Never show extension = Erweiterung nie anzeigen
+About = Über
+Enter new extension (starting with dot) here = Geben Sie eine neue Erweiterung (beginnend mit einem Punkt) hier ein
+Class properties = Klassen-Eigenschaften
+Add class = Klasse hinzufügen
+Delete class = Klasse löschen
+Filter = Filter
+Disable filter = Filter deaktivieren
+Add menu item = Menü-Eintrag hinzufügen
+Delete item = Eintrag löschen
+Row text = Zeilentext
+Select program = Programm auswählen
+Command = Befehl
+Remove icon = Symbol entfernen
+Select icon file = Symbol-Datei auswählen
+Icon file = Symbol-Datei
+Hidden = Versteckt
+Special = Speziell
+All types = Alle Typen
+Unknown = Unbekannt
+Folder = Ordner
+Rules = Regeln
+Enable content rules = Inhaltsregeln aktivieren
+Starts with: = Beginnt mit:
+Contains: = Enthält:
+Add rule = Regel hinzufügen
+Delete rule = Regel löschen
+Rule name = Regelname
+Matching method = Übereinstimmungsmethode
+Text to find = Zu findender Text
+Access denied = Zugriff verweigert
+Run as administrator = Als Administrator ausführen
+
+Cancel = Abbrechen
+Verb title = Befehlsname
+Special types = Spezielle Typen
+Background = Hintergrund
+Directory = Verzeichnis
+LibraryFolder = Bibliotheksordner
+Drive = Laufwerk
+
+[Setup]
+
+Types setup = Types Setup
+Install = Installieren
+Add to Control Panel = Zur Systemsteuerung hinzufügen
+Start menu shortcut = Startmenüverknüpfung hinzufügen
+Desktop shortcut = Desktopverknüpfung hinzufügen
+Where to put program files? = Installationsordner
+Done = Fertig
+Add to context menus = Zum Kontextmenü hinzufügen
+Edit file type = Dateityp bearbeiten
+
+[Panel]
+
+PanelDescription = Dateitypen bearbeiten
+PanelKeywords = extensions;associations;types;classes;icons;context;menu;explorer;Erweiterungen;Klassen;Symbole;Kontext;Menü

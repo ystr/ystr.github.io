@@ -1,0 +1,133 @@
+﻿Svenska
+
+[Main]
+
+Search = Sök
+Add = Lägg till
+Types = Filtyper
+Classes = Klasser
+Extensions = Filnamnstillägg
+Type = Filtyp
+Use linked class = Använd länkad klass
+Title = Rubrik
+Name = Namn
+Properties = Egenskaper
+Rename = Byt namn
+Delete = Ta bort
+Create = Skapa
+Refresh = Uppdatera
+Class = Klass
+Actions = Åtgärder
+Icon = Ikon
+Default = Standard
+Use DDE = Använd DDE
+DDE Message = DDE-meddelande
+Application = Program
+Application not running = Program som inte körs
+Topic = Ämne
+Executables = Körbara filer
+Perceived type = Uppfattad typ
+Other = Övrigt
+Extension visibility = Filnamnstilläggets synlighet
+Follow Explorer settings = Följ Utforskarens inst.
+Always show extension = Visa alltid filnamnstillägget
+Never show extension = Visa aldrig filnamnstillägget
+About = Om
+License = Licens
+Authors = Skapat av
+Manual = Handbok
+History = Versionshistorik
+Enter new extension (starting with dot) here = Ange nytt filnamnstillägg här (inled med punkt)
+Class properties = Klassegenskaper
+Add class = Lägg till klass
+Delete class = Ta bort klass
+Filter = Filter
+Disable filter = Inaktivera filter
+Add menu item = Lägg till menyobjekt
+Delete item = Ta bort objekt
+Row text = Radtext
+Select program = Välj program
+Command = Kommando
+Remove icon = Ta bort ikon
+Select icon file = Välj ikonfil
+Icon file = Ikonfil
+Hidden = Dold
+Special = Special
+All types = Alla filtyper
+Unknown = Okänd
+Folder = Mapp
+Rules = Regler
+Enable content rules = Aktivera innehållsregler
+Starts with: = Börjar med:
+Contains: = Innehåller:
+Add rule = Lägg till regel
+Delete rule = Ta bort regel
+Rule name = Regelnamn
+Matching method = Matchningsmetod
+Text to find = Text att hitta
+
+[Setup]
+
+Types setup = Installation av Types
+Install = Installera
+Cancel = Avbryt
+Add to Control Panel = Lägg till i Kontrollpanelen
+Start menu shortcut = Genväg i startmenyn
+Desktop shortcut = Skrivbordsgenväg
+Abort = Avbryt
+Close = Stäng
+Types = Types
+Where to put program files? = Välj mapp för programfiler
+Aborted by user = Avbrutet av användaren
+Done = Klar
+Fail = Misslyckades
+Already exists, backing up = Finns redan, säkerhetskopierar
+Creating program folder = Skapar programmapp
+Already exists = Finns redan
+Cannot create directory = Det gick inte att skapa mapp
+Extracting main executable = Packar upp huvudprogramfilen
+Extracting association proxy = Packar upp associationsproxy
+Cannot copy = Det fick inte att kopiera
+Applying settings = Tillämpar inställningar
+Failed to modify registry = Det gick inte att ändra registret
+Extracting control panel applet = Packar upp miniprogrammet för Kontrollpanelen
+Registering control panel applet = Registrerar miniprogrammet för Kontrollpanelen
+Error registering control panel applet = Ett fel inträffade vid registrering av miniprogrammet för Kontrollpanelen
+Creating desktop shortcut = Skapar skrivbordsgenväg
+Cannot add desktop shortcut = Det gick inte att skapa någon skrivbordsgenväg
+Creating Start menu shortcut = Skapar startmenygenväg
+Cannot add Start menu shortcut = Det gick inte att skapa någon startmenygenväg
+Extracting uninstaller = Packar upp avinstallationsprogrammet
+Registering uninstaller = Registrerar avinstallationsprogrammet
+Failed to add uninstall entry = Det gick inte att skapa någon avinstallationspost
+Removing backup files = Tar bort säkerhetskopierade filer
+Installation completed = Installationen har slutförts
+Rolling back = Återställer
+Removing main executable = Tar bort huvudprogramfilen
+Removing association proxy = Tar bort associationsproxyn
+Removing uninstaller = Tar bort avinstallationsprogrammet
+Removing control panel applet = Tar bort miniprogrammet för Kontrollpanelen
+Restoring backup files = Återställer säkerhetskopierade filer
+Removing directory = Tar bort mapp
+Removing desktop shortcut = Tar bort skrivbordsgenvägen
+Removing Start menu shortcut = Tar bort startmenygenvägen
+Installation aborted = Installationen avbröts
+Add to context menus = Lägg till Types i snabbmenyer
+Adding context menu entry = Lägger till snabbmenyobjekt
+Cannot add context menu entry = Det gick inte att lägga till något snabbmenyobjekt
+Removing context menu entry = Tar bort snabbmenyobjektet
+Edit file type = Redigera filtyp
+Copying language packs = Kopierar språkpaket
+
+[Remove]
+
+Types removal = Avinstallation av Types
+RemoveTypes? = Är du säker på att du vill avinstallera Types?
+CheckNotRunning. = Säkerställ att programmet inte körs.
+EraseSettings? = Ta bort alla programinställningar?
+RemovalDone. = Types har tagits bort från datorn.
+
+[Panel]
+
+PanelDescription = Hantera filtyper
+PanelKeywords = filtyp;filtyper;filtillägg;filnamnstillägg

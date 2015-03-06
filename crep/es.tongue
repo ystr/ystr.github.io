@@ -1,0 +1,20 @@
+Español
+
+{AppName} setup = {AppName} instalación
+Install = Instalar
+Done = Hecho
+Replace… = Reemplazar…
+Error: {ErrorCode} = Error: {ErrorCode}
+
+Replace = Reemplazar
+Test = Prueba
+Done. = Hecho.
+Files: = Archivos:
+Names: = Nombres:
+Errors: = Errores:
+Case-sensitive = Distinguir mayúsculas
+Full words only = Sólo palabras completas
+Regular expression = Expresión regular
+Include subfolders = Incluir subcarpetas
+Replace in file names = Reemplazar en nombres de archivos
+Replace in contents = Reemplazar en contenido

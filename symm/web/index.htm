@@ -1,0 +1,350 @@
+<!DOCTYPE HTML><title>Symmetric</title>
+
+<style>
+	
+	body { margin: 0; padding: 0; }
+	#Symvas, #Grid { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+	#Palette { position: absolute; top: 64px; right: 20px; visibility: hidden; }
+	
+	.Toolbar { position: absolute; margin: 0; }
+	.Toolbar .Selected { border: 2px solid #000; margin: 2px; }
+	.Toolbar * { margin: 4px; }
+	
+	.Top { padding-top: 16px; padding-bottom: 0; top: 0; }
+	.Bottom { padding-bottom: 16px; padding-top: 0; bottom: 0; }
+	.Left { left: 0; padding-left: 16px; padding-right: 0; text-align: left; }
+	.Right { right: 0; padding-left: 0; padding-right: 16px; text-align: right; }
+	
+	.Links { position: absolute; bottom: 0; padding-top: 0; padding-bottom: 16px; }
+	.Links span, .Links a { color: #888; margin-right: .5em; }
+	
+</style>
+
+<body>
+	
+	<canvas id='Grid'></canvas>
+	<canvas id='Symvas'></canvas>
+	<canvas id='Palette' alt='Colors' title='Colors' width='32' height='256'></canvas>
+	
+	<div class='Toolbar Bottom Left'>
+		<img id='NoneBtn' alt='None' title='None' src='None.svg'/>
+		<img id='VerticalBtn' alt='Vertical' title='Vertical' src='Vertical.svg'/>
+		<img id='HorizontalBtn' alt='Horizontal' title='Horizontal' src='Horizontal.svg'/>
+		<img id='QuadrilateralBtn' alt='Quadrilateral' title='Quadrilateral' src='Quadrilateral.svg'/>
+	</div>
+	
+	<div class='Toolbar Top Right'>
+		<img id='EraserBtn' alt='Eraser' title='Eraser (E)' src='Eraser.svg'/>
+		<img id='PencilBtn' alt='Pencil' title='Pencil (P)' src='Pencil.svg'/>
+		<img id='ColorBtn' alt='Color' title='Color' src='Color.svg'/>
+	</div>
+	
+	<div class='Toolbar Top Left'>
+		<img id='NewBtn' alt='New' title='New' src='New.svg'/>
+		<img id='TraceBtn' alt='Trace' title='Trace' src='Trace.svg'/>
+	</div>
+	
+	<div class='Links Right'>
+		<a href='mailto:izt@ya.ru'>@</a>
+	</div>
+	
+</body>
+
+<script>
+	
+	
+	function $ (id)
+	{
+		return document.getElementById(id);
+	}
+	
+	function DrawLine (tgt, style, width, fx, fy, tx, ty)
+	{
+		tgt.Context.beginPath();
+		tgt.Context.lineCap = 'round';
+		tgt.Context.globalCompositeOperation = 'source-over';
+		tgt.Context.strokeStyle = style;
+		tgt.Context.lineWidth = width;
+		tgt.Context.moveTo(fx, fy);
+		tgt.Context.lineTo(tx, ty);
+		tgt.Context.stroke();
+	}
+	
+	function Erase (tgt, width, fx, fy, tx, ty)
+	{
+		tgt.Context.beginPath();
+		tgt.Context.lineCap = 'round';
+		tgt.Context.globalCompositeOperation = 'destination-out';
+		tgt.Context.strokeStyle = 'rgba(0,0,0,1)';
+		tgt.Context.lineWidth = width;
+		tgt.Context.moveTo(fx, fy);
+		tgt.Context.lineTo(tx, ty);
+		tgt.Context.stroke();
+	}
+	
+	function Clear (tgt)
+	{
+		tgt.Context.clearRect(0, 0, Grid.width, Grid.height);
+	}
+	
+	
+	var Grid = $('Grid');
+	var Symvas = $('Symvas');
+	var NewBtn = $('NewBtn');
+	var TraceBtn = $('TraceBtn');
+	var NoneBtn = $('NoneBtn');
+	var VerticalBtn = $('VerticalBtn');
+	var HorizontalBtn = $('HorizontalBtn');
+	var QuadrilateralBtn = $('QuadrilateralBtn');
+	var PencilBtn = $('PencilBtn');
+	var EraserBtn = $('EraserBtn');
+	var ColorBtn = $('ColorBtn');
+	var Palette = $('Palette');
+	
+	
+	Palette.Context = Palette.getContext('2d');
+	Symvas.Context = Symvas.getContext('2d');
+	Grid.Context = Grid.getContext('2d');
+	
+	
+	var Symmetry = "Vertical";
+	var Tool = "Pencil";
+	var Color = "#000";
+	var LineWidth = 1;
+	
+	
+	function SetTool (t)
+	{
+		Tool = t;
+		
+		PencilBtn.className = Tool == 'Pencil' ? 'Selected' : '';
+		EraserBtn.className = Tool == 'Eraser' ? 'Selected' : '';
+	}
+	
+	PencilBtn.onclick = function () { SetTool('Pencil'); }
+	EraserBtn.onclick = function () { SetTool('Eraser'); }
+	
+	
+	Apply = function (fx, fy, tx, ty)
+	{
+		switch (Tool)
+		{
+			case "Pencil": DrawLine(Symvas, Color, LineWidth, fx, fy, tx, ty); break;
+			case "Eraser": Erase(Symvas, LineWidth * 10, fx, fy, tx, ty); break;
+		}
+	}
+	
+	
+	
+	Pointers = [];
+	
+	Down = function (id, x, y)
+	{
+		Pointers[id] = { PreX: x, PreY: y };
+	}
+	
+	Move = function (id, x, y)
+	{
+		var p = Pointers[id];
+		if (!p) return;
+		
+		Apply(p.PreX, p.PreY, x, y);
+		
+		switch (Symmetry)
+		{
+			case "Vertical": Apply(Symvas.width - p.PreX, p.PreY, Symvas.width - x, y); break;
+			case "Horizontal": Apply(p.PreX, Symvas.height - p.PreY, x, Symvas.height - y); break;
+			
+			case "Quadrilateral":
+				
+				var xx = Symvas.width - x, yy = Symvas.height - y;
+				var pxx = Symvas.width - p.PreX, pyy = Symvas.height - p.PreY;
+				
+				Apply(pxx, p.PreY, xx, y);
+				Apply(p.PreX, pyy, x, yy);
+				Apply(pxx, pyy, xx, yy);
+				
+			break;
+		}
+		
+		p.PreX = x;
+		p.PreY = y;
+	}
+	
+	Up = function (id)
+	{
+		Pointers[id] = null;
+	}
+	
+	
+	
+	OnTouchStart = function (e)
+	{
+		for (var i = 0; i < e.touches.length; i++)
+		{
+			var t = e.touches[i];
+			Down(t.identifier, t.clientX, t.clientY);
+		}
+	}
+	
+	OnTouchMove = function (e)
+	{
+		e.preventDefault();
+		e.stopPropagation();
+		
+		for (var i = 0; i < e.touches.length; i++)
+		{
+			var t = e.touches[i];
+			Move(t.identifier, t.clientX, t.clientY);
+		}
+	}
+	
+	OnTouchEnd = function (e)
+	{
+		for (var i = 0; i < e.changedTouches.length; i++)
+		{
+			Up(e.changedTouches[i].identifier);
+		}
+	}
+	
+	OnMouseDown = function (e)
+	{
+		Down ( 0,
+			e.offsetX * Symvas.width / window.innerWidth,
+			e.offsetY * Symvas.height / window.innerHeight
+		);
+	}
+	
+	OnMouseMove = function (e)
+	{
+		e.preventDefault();
+		e.stopPropagation();
+		
+		Move ( 0,
+			e.offsetX * Symvas.width / window.innerWidth,
+			e.offsetY * Symvas.height / window.innerHeight
+		);
+	}
+	
+	OnMouseUp = function (e)
+	{
+		Up(0);
+	}
+	
+	
+	Symvas.addEventListener('touchstart', OnTouchStart, false);
+	Symvas.addEventListener('touchmove', OnTouchMove, false);
+	Symvas.addEventListener('touchend', OnTouchEnd, false);
+	Symvas.addEventListener('mousedown', OnMouseDown, false);
+	Symvas.addEventListener('mousemove', OnMouseMove, false);
+	Symvas.addEventListener('mouseup', OnMouseUp, false);
+	
+	
+	function SetColor (color)
+	{
+		Color = color;
+		ColorBtn.style.background = color;
+	}
+	
+	ColorBtn.onclick = function ()
+	{
+		if (Palette.style.visibility == 'visible') Palette.style.visibility = 'hidden';
+		else Palette.style.visibility = 'visible';
+	}
+	
+	Palette.onmousedown = function (e)
+	{
+		var pixel = Palette.Context.getImageData(e.offsetX, e.offsetY, 1, 1).data;
+		var r = pixel[0], g = pixel[1], b = pixel[2], a = pixel[3];
+		SetColor('rgba(' + r + ',' + g + ',' + b + ',' + a + ')');
+	}
+	
+	
+	function SetSymmetry (sym)
+	{
+		var hor = false;
+		var ver = false;
+		
+		NoneBtn.className = '';
+		VerticalBtn.className = '';
+		HorizontalBtn.className = '';
+		QuadrilateralBtn.className = '';
+		
+		switch (Symmetry = sym)
+		{
+			case "None": NoneBtn.className = 'Selected'; break;
+			case "Vertical": ver = true; VerticalBtn.className = 'Selected'; break;
+			case "Horizontal": hor = true; HorizontalBtn.className = 'Selected'; break;
+			case "Quadrilateral": ver = hor = true; QuadrilateralBtn.className = 'Selected'; break;
+		}
+		
+		Clear(Grid);
+		
+		if (ver) DrawLine(Grid, '#000', 1, Grid.width / 2, 0, Grid.width / 2, Grid.height);
+		if (hor) DrawLine(Grid, '#000', 1, 0, Grid.height / 2, Grid.width, Grid.height / 2);
+	}
+	
+	NoneBtn.onclick = function () { SetSymmetry("None"); }
+	VerticalBtn.onclick = function () { SetSymmetry("Vertical"); }
+	HorizontalBtn.onclick = function () { SetSymmetry("Horizontal"); }
+	QuadrilateralBtn.onclick = function () { SetSymmetry("Quadrilateral"); }
+	
+	
+	function New ()
+	{
+		Symvas.width = Grid.width = window.innerWidth;
+		Symvas.height = Grid.height = window.innerHeight;
+		
+		SetSymmetry(Symmetry);
+		SetColor(Color);
+		SetTool(Tool);
+		
+		Clear(Symvas);
+		
+		var m = Palette.Context.createLinearGradient(0, 0, 0, Palette.height);
+		var g = Palette.Context.createLinearGradient(0, 0, 0, Palette.height);
+		
+		m.addColorStop(0, 'black');
+		m.addColorStop(1, 'white');
+		
+		g.addColorStop(1/7 * 0, 'red');
+		g.addColorStop(1/7 * 1, 'orange');
+		g.addColorStop(1/7 * 2, 'yellow');
+		g.addColorStop(1/7 * 3, 'green');
+		g.addColorStop(1/7 * 4, 'cyan');
+		g.addColorStop(1/7 * 5, 'blue');
+		g.addColorStop(1/7 * 6, 'purple');
+		g.addColorStop(1/7 * 7, 'red');
+		
+		var half = Palette.width / 2;
+		
+		Palette.Context.fillStyle = m; Palette.Context.fillRect(0, 0, half, Palette.height);
+		Palette.Context.fillStyle = g; Palette.Context.fillRect(half, 0, half, Palette.height);
+	}
+	
+	window.onload = New;
+	NewBtn.onclick = New;
+	
+	
+	function Trace ()
+	{
+		var id = Symvas.Context.getImageData(0, 0, Symvas.width, Symvas.height);
+		for (var i = 0; i < id.data.length; i += 4) id.data[i + 3] /= 2;
+		Symvas.Context.putImageData(id, 0, 0);
+	}
+	
+	TraceBtn.onclick = Trace;
+	
+	
+	window.onkeypress = function (e)
+	{
+		switch (e.keyCode)
+		{
+			case 112: SetTool('Pencil'); break;
+			case 101: SetTool('Eraser'); break;
+			case 116: Trace(); break;
+		}
+	}
+	
+	
+</script>

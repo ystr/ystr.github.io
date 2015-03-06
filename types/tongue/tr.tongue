@@ -1,0 +1,133 @@
+﻿Türkçe
+
+[Main]
+
+Search = Arama
+Add = Ekle
+Types = Türler
+Classes = Sınıflar
+Extensions = Uzantılar
+Type = Tür
+Use linked class = Kullanılan sınıf bağlantısı
+Title = Başlık
+Name = Ad
+Properties = Özellikler
+Rename = Yeniden Adlandır
+Delete = Sil
+Create = Oluştur
+Refresh = Yenile
+Class = Sınıf
+Actions = Eylem
+Icon = Simge
+Default = Varsayılan
+Use DDE = DDE kullan
+DDE Message = DDE mesajı
+Application = Uygulama
+Application not running = Çalıştırmayan uygulama
+Topic = Başlık
+Executables = Çalıştırılabilir
+Perceived type = Algılanan tür
+Other = Diğer
+Extension visibility = Uzantı görünürlüğü
+Follow Explorer settings = Klasör ayarlarına uy
+Always show extension = Her zaman göster
+Never show extension = Asla gösterme
+About = Hakkında
+License = Lisans
+Authors = Oluşturucu
+Manual = Kılavuz
+History = Geçmiş
+Enter new extension (starting with dot) here = Buraya nokta ile başlayan yeni uzantı girin
+Class properties = Sınıf özellikleri
+Add class = Sınıf ekle
+Delete class = Sınıf sil
+Filter = Filtre
+Disable filter = Filtre devredışı
+Add menu item = Menü öğesi ekle
+Delete item = Öğe sil
+Row text = Satır metni
+Select program = Program seç
+Command = Komut
+Remove icon = Simge sil
+Select icon file = Simge dosyası seç
+Icon file = Simge dosyası
+Hidden = Gizlenmiş
+Special = Özel
+All types = Tüm türler
+Unknown = Bilinmeyen
+Folder = Klasör
+Rules = Kurallar
+Enable content rules = İçerik kuralları etkin
+Starts with: = ile başlar
+Contains: = İçerir
+Add rule = Kural ekle
+Delete rule = Kural sil
+Rule name = Kural adı
+Matching method = Eşleştirme yöntemi
+Text to find = Metni bul
+
+[Kurulum]
+
+Types setup = Types Kurulum
+Install = Yükle
+Cancel = Vazgeç
+Add to Control Panel = Denetim Masası'na ekle
+Start menu shortcut = Başlat menüsü kısayolu
+Desktop shortcut = Masaüstü kısayolu
+Abort = Durdur
+Close = Kapat
+Types = Types
+Where to put program files? = Program dosyaları nereye yüklensin?
+Aborted by user = Kullanıcı tarafından iptal edildi
+Done = Başarılı
+Fail = Başarısız
+Already exists, backing up = Zaten yedekleme var
+Creating program folder = Program klasörü oluşturuluyor
+Already exists = Zaten var
+Cannot create directory = Dizin oluşturulamıyor
+Extracting main executable = Ana çalıştırıcı ayıklanıyor
+Extracting association proxy = Proxy katılımları ayıklanıyor
+Cannot copy = Kopyalayamazsınız
+Applying settings = Ayarlar uygulanıyor
+Failed to modify registry = Kayıt defteri değeri değiştirme başarısız
+Extracting control panel applet = Denetim Masası uygulaması ayıklanıyor
+Registering control panel applet = Denetim Masası uygulaması kaydediliyor
+Error registering control panel applet = Denetim Masası uygulaması kayıt hatası
+Creating desktop shortcut = Masaüstü kısayolu oluşturuluyor
+Cannot add desktop shortcut = Masaüstü kısayolu eklenemiyor
+Creating Start menu shortcut = Başlat menüsü kısayolu oluşturuluyor
+Cannot add Start menu shortcut = Başlat menüsü kısayolu eklenemiyor
+Extracting uninstaller = Kaldırıcı ayıklanıyor
+Registering uninstaller = Kaldırıcı kaydediliyor
+Failed to add uninstall entry = Kaldırıcı girdisi ekleme hatası
+Removing backup files = Yedek dosyalar kaldırılıyor
+Installation completed = Yükleme tamamlandı
+Rolling back = Geri alınıyor
+Removing main executable = Ana çalıştırıcı kaldırılıyor
+Removing association proxy = Vekil katılımları kaldırılıyor
+Removing uninstaller = Kaldırıcı kaldırılıyor
+Removing control panel applet = Denetim Masası uygulaması kaldırılıyor
+Restoring backup files = Yedekleme dosyaları yükleniyor
+Removing directory = Dizin kaldırılıyor
+Removing desktop shortcut = Masaüstü kısayolu kaldırılıyor
+Removing Start menu shortcut = Başlat menüsü kısayolu kaldırılıyor
+Installation aborted = Yükleme iptal edildi
+Add to context menus = Sağ tık menülerini ekle
+Adding context menu entry = Sağ tık menüleri girdisi ekleniyor
+Cannot add context menu entry = Sağ tık menüleri girdisi eklenemiyor
+Removing context menu entry = Sağ tık menüleri girdisi kaldırılıyor
+Edit file type = Dosya türü düzenle
+Copying language packs = Dil paketleri kopyalama
+
+[Kaldırma]
+
+Types removal = Types'i kaldırma
+RemoveTypes? = Types'i kaldırmak istediğinizden emin misiniz?
+CheckNotRunning. = Programın çalışmadığından emin olun.
+EraseSettings? = Tüm program ayarları silinsin mi?
+RemovalDone. = Types sisteminizden kaldırıldı.
+
+[Panel]
+
+PanelDescription = Dosya türlerini yönetin
+PanelKeywords = extensions;associations;types;classes;icons;context;menu;explorer
